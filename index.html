@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="fr" style="background:#060610">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+<meta name="theme-color" content="#060610"/>
+<meta name="color-scheme" content="dark"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<title>PDFCash IA</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:#060610!important;color:#fff!important;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased;overscroll-behavior:none}
+:root{--p:#7c3aed;--pk:#ec4899;--g:#10b981;--go:#f59e0b;--b2:#0f0f1e;--b3:#161628;--bo:#2a2a45;--bo2:#353558;--t2:#e2e2f0;--t3:#9898b8;--t4:#5a5a78;--cover1:#1a0535;--cover2:#0d1030;--accent:#7c3aed}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes glow{0%,100%{box-shadow:0 0 30px #7c3aed55;transform:scale(1)}50%{box-shadow:0 0 60px #7c3aed99;transform:scale(1.07)}}
+@keyframes bar{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+@keyframes countup{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+.fu{animation:fadeUp .4s ease both}
+.hide{display:none!important}
+.step{display:none}
+.step.on{display:block}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:99;background:rgba(6,6,16,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--bo);height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 16px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-ico{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--p),var(--pk));display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 0 16px #7c3aed44;flex-shrink:0}
+.logo-n{font-family:'Sora',sans-serif;font-size:17px;font-weight:900;color:#fff;line-height:1}
+.logo-n span{color:#a78bfa}
+.logo-s{font-size:9px;color:var(--t4);line-height:1;margin-top:2px}
+.hdr-r{display:flex;align-items:center;gap:8px}
+.ai-badge{background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.35);border-radius:20px;padding:5px 10px;font-size:11px;color:#a78bfa;font-weight:700}
+#btn-back{background:transparent;border:1px solid var(--bo2);border-radius:8px;padding:7px 12px;color:var(--t3);font-size:12px;cursor:pointer;font-family:inherit}
+
+/* MAIN */
+main{max-width:540px;margin:0 auto;padding:18px 14px 90px}
+
+/* COUNTER BANNER */
+.counter-banner{background:linear-gradient(135deg,rgba(124,58,237,.15),rgba(236,72,153,.1));border:1px solid rgba(124,58,237,.3);border-radius:14px;padding:14px 18px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.counter-left{display:flex;align-items:center;gap:10px}
+.counter-fire{font-size:24px}
+.counter-num{font-family:'Sora',sans-serif;font-size:26px;font-weight:900;color:#fff;line-height:1;animation:countup .5s ease}
+.counter-label{font-size:10px;color:var(--t3);margin-top:2px}
+.counter-live{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--g);font-weight:700}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--g);animation:glow 1.5s infinite}
+
+/* HERO */
+.pill{display:inline-flex;align-items:center;background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.3);border-radius:30px;padding:8px 16px;font-size:12px;color:#a78bfa;font-weight:700;margin-bottom:16px}
+h1.big{font-family:'Sora',sans-serif;font-size:clamp(30px,9vw,46px);font-weight:900;line-height:1.1;letter-spacing:-1.5px;margin-bottom:14px;color:#fff}
+.grad{background:linear-gradient(90deg,var(--p),var(--pk),var(--go));background-size:200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite}
+.hero-sub{color:var(--t3);font-size:15px;line-height:1.65;margin-bottom:22px}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:22px}
+.sbox{background:var(--b2);border:1px solid var(--bo);border-radius:14px;padding:15px 8px;text-align:center}
+.sn{font-family:'Sora',sans-serif;font-size:16px;font-weight:900;color:#a78bfa}
+.sl{font-size:10px;color:var(--t4);margin-top:3px}
+
+/* LABEL */
+.lbl{font-size:10px;color:var(--t4);font-weight:700;letter-spacing:2px;margin-bottom:10px}
+
+/* DOC BUTTONS */
+.dtypes{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-bottom:22px}
+.dbtn{background:var(--b2);border:2px solid var(--bo);border-radius:14px;padding:16px 13px;cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:4px;font-family:inherit;touch-action:manipulation;min-height:86px;position:relative;transition:border-color .2s,background .2s}
+.dbtn:active{transform:scale(.97)}
+.dbtn.sel{background:rgba(124,58,237,.12);border-color:var(--p);box-shadow:0 0 18px rgba(124,58,237,.15)}
+.dbtn.sel::after{content:'✓';position:absolute;top:9px;right:11px;color:var(--p);font-weight:900;font-size:14px}
+.di{font-size:22px;line-height:1}
+.dn{color:#fff;font-weight:700;font-size:13px;font-family:'Sora',sans-serif}
+.dp{color:var(--g);font-size:10px;font-weight:700}
+
+/* COLOR PICKER */
+.color-section{margin-bottom:22px}
+.color-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.cbtn{border:3px solid transparent;border-radius:12px;padding:12px 8px;cursor:pointer;text-align:center;font-family:inherit;touch-action:manipulation;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:5px;min-height:72px;justify-content:center}
+.cbtn:active{transform:scale(.95)}
+.cbtn.sel{border-color:#fff;box-shadow:0 0 16px rgba(255,255,255,.3)}
+.c-dot{width:28px;height:28px;border-radius:50%}
+.c-name{font-size:10px;font-weight:700;color:#fff}
+
+/* TEXTAREA */
+textarea{width:100%;background:var(--b2);border:2px solid var(--bo);border-radius:14px;color:#fff!important;font-size:15px;font-family:inherit;padding:16px;resize:none;outline:none;line-height:1.65;margin-bottom:14px;-webkit-appearance:none;display:block;transition:border-color .2s}
+textarea:focus{border-color:var(--p)}
+textarea::placeholder{color:var(--t4)}
+
+/* SUGGESTIONS */
+.sugs{margin-bottom:22px}
+.sug-lbl{font-size:10px;color:var(--t4);font-weight:700;letter-spacing:1.5px;margin-bottom:8px}
+.sug-list{display:flex;flex-wrap:wrap;gap:7px}
+.sb{background:var(--b2);border:1px solid var(--bo);border-radius:20px;padding:8px 13px;color:var(--t3);font-size:12px;cursor:pointer;font-family:inherit;touch-action:manipulation}
+.sb:active{background:var(--b3);color:var(--t2)}
+
+/* ERROR */
+.err{background:rgba(127,29,29,.3);border:1px solid #7f1d1d;border-radius:10px;padding:12px 15px;color:#fca5a5;font-size:13px;margin-bottom:14px;line-height:1.5}
+
+/* BUTTONS */
+.btn-big{width:100%;background:linear-gradient(135deg,var(--p),var(--pk));border:none;border-radius:16px;padding:21px 24px;color:#fff;font-size:18px;font-weight:800;cursor:pointer;font-family:'Sora',sans-serif;box-shadow:0 4px 28px rgba(124,58,237,.45);transition:all .2s;touch-action:manipulation;min-height:66px;display:flex;align-items:center;justify-content:center}
+.btn-big:disabled{background:var(--b3);color:var(--t4);box-shadow:none;cursor:not-allowed}
+.btn-big:not(:disabled):active{transform:scale(.97)}
+.btn-mid{width:100%;background:var(--b2);border:2px solid var(--bo2);border-radius:16px;padding:18px 24px;color:var(--t2);font-size:16px;font-weight:700;cursor:pointer;font-family:'Sora',sans-serif;margin-top:10px;min-height:60px;touch-action:manipulation;transition:all .2s}
+.btn-mid:active{background:var(--b3);transform:scale(.97)}
+.btn-green{width:100%;background:linear-gradient(135deg,#059669,#10b981);border:none;border-radius:16px;padding:18px 24px;color:#fff;font-size:16px;font-weight:800;cursor:pointer;font-family:'Sora',sans-serif;margin-top:10px;min-height:60px;touch-action:manipulation;box-shadow:0 4px 20px rgba(16,185,129,.35)}
+.btn-green:active{transform:scale(.97)}
+.btn-sm{width:100%;background:transparent;border:1px solid var(--bo);border-radius:16px;padding:16px 24px;color:var(--t4);font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:10px;min-height:54px;touch-action:manipulation}
+
+/* GENERATING */
+.gen-wrap{display:flex;flex-direction:column;align-items:center;text-align:center;padding:40px 8px 20px}
+.robot{width:94px;height:94px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--pk));display:flex;align-items:center;justify-content:center;font-size:44px;animation:glow 2s ease-in-out infinite;margin-bottom:26px}
+.gen-t{font-family:'Sora',sans-serif;font-size:24px;font-weight:900;margin-bottom:10px;color:#fff}
+.gen-sub{color:var(--t4);font-size:13px;font-style:italic;margin-bottom:28px;max-width:290px;line-height:1.6}
+.pbar-wrap{width:100%;max-width:310px;background:var(--b2);border-radius:100px;height:12px;overflow:hidden;border:1px solid var(--bo);margin-bottom:10px}
+.pbar{height:100%;width:0%;background:linear-gradient(90deg,var(--p),var(--pk),var(--p));background-size:200%;border-radius:100px;transition:width .4s ease;animation:bar 2s linear infinite}
+.pct{font-family:'Sora',sans-serif;color:#a78bfa;font-size:18px;font-weight:900;margin-bottom:28px}
+.steps{display:flex;flex-direction:column;gap:11px;text-align:left;width:100%;max-width:270px}
+.si{font-size:14px;color:var(--t4);transition:color .4s;line-height:1.4}
+.si.done{color:var(--g)}
+.si.cur{color:var(--t2);font-weight:600}
+
+/* CARDS */
+.card{background:var(--b2);border:1px solid var(--bo);border-radius:16px;padding:18px 16px;margin-bottom:12px}
+.card-lbl{font-size:10px;color:var(--t4);font-weight:700;letter-spacing:2px;margin-bottom:12px;display:block}
+
+/* SUCCESS */
+.ok-bar{background:rgba(5,46,22,.85);border:1px solid #166534;border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.ok-ico{font-size:30px;flex-shrink:0}
+.ok-t{font-weight:800;font-size:15px;color:#4ade80}
+.ok-s{font-size:11px;color:#16a34a;margin-top:2px}
+
+/* COVER CARD */
+.cover{border-radius:18px;overflow:hidden;margin-bottom:12px;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.cover-bar{height:5px}
+.cover-in{padding:20px 18px 18px}
+.c-badge{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:5px 12px;font-size:10px;color:#fff;font-weight:700;letter-spacing:2px;margin-bottom:12px}
+.c-title{font-family:'Sora',sans-serif;font-size:clamp(18px,5vw,24px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:8px}
+.c-sub{color:rgba(255,255,255,.6);font-size:12px;margin-bottom:10px;line-height:1.55}
+.c-tag{font-style:italic;color:rgba(255,255,255,.8);font-size:12px;border-left:3px solid rgba(255,255,255,.5);padding-left:12px;margin-bottom:16px;line-height:1.55}
+.c-price{display:inline-flex;align-items:center;gap:6px;background:rgba(16,185,129,.2);border:1px solid rgba(16,185,129,.5);border-radius:9px;padding:10px 14px;color:#4ade80;font-size:13px;font-weight:800;font-family:'Sora',sans-serif}
+
+/* TOC */
+.toc-list{display:flex;flex-direction:column;gap:6px}
+.toc-row{display:flex;gap:10px;align-items:flex-start;background:#060610;border-radius:9px;padding:10px 12px;font-size:12px;color:var(--t2);border:1px solid var(--bo);line-height:1.4}
+.toc-n{color:var(--p);font-weight:800;font-size:13px;min-width:19px;flex-shrink:0;font-family:'Sora',sans-serif}
+
+/* REVENUE */
+.rev-card{background:linear-gradient(135deg,rgba(5,46,22,.85),rgba(6,78,59,.2));border:1px solid #166534;border-radius:16px;padding:18px 16px;margin-bottom:12px}
+.rev-lbl{font-size:11px;color:var(--g);font-weight:800;margin-bottom:14px;letter-spacing:1px}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.rbox{background:rgba(5,46,22,.7);border-radius:10px;padding:12px 5px;text-align:center;border:1px solid rgba(22,101,52,.5)}
+.rq{font-size:10px;color:var(--t4);margin-bottom:4px}
+.ra{font-family:'Sora',sans-serif;font-size:13px;font-weight:900;color:var(--g);line-height:1.2}
+
+/* WA */
+.wa-msg{color:var(--t2);font-size:13px;line-height:1.75;background:#060610;border-radius:10px;padding:12px 13px;border:1px solid var(--bo);border-left:3px solid #25d366;margin-bottom:11px}
+.wa-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btn-copy{background:var(--b3);border:1px solid var(--bo2);border-radius:10px;padding:13px;color:var(--t3);font-size:13px;cursor:pointer;font-family:inherit;font-weight:600;min-height:48px;display:flex;align-items:center;justify-content:center;touch-action:manipulation;transition:all .2s}
+.btn-copy.ok{background:rgba(5,46,22,.8);border-color:#166534;color:#4ade80}
+.btn-wa{background:rgba(37,211,102,.12);border:1px solid rgba(37,211,102,.3);border-radius:10px;padding:13px;color:#25d366;font-size:13px;font-weight:700;text-decoration:none;font-family:inherit;min-height:48px;display:flex;align-items:center;justify-content:center;touch-action:manipulation}
+.btn-wa:active{background:rgba(37,211,102,.22)}
+
+/* PAYMENT BOX */
+.pay-box{background:linear-gradient(135deg,rgba(5,46,22,.6),rgba(6,78,59,.3));border:2px solid #059669;border-radius:16px;padding:20px 18px;margin-bottom:12px}
+.pay-title{font-family:'Sora',sans-serif;font-size:16px;font-weight:900;color:#4ade80;margin-bottom:6px}
+.pay-sub{font-size:12px;color:var(--t3);margin-bottom:14px;line-height:1.6}
+.pay-methods{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.pay-btn{border:none;border-radius:12px;padding:14px 10px;cursor:pointer;font-family:'Sora',sans-serif;font-weight:800;font-size:13px;touch-action:manipulation;min-height:52px;transition:all .2s}
+.pay-btn:active{transform:scale(.97)}
+.pay-wave{background:linear-gradient(135deg,#2563eb,#3b82f6);color:#fff}
+.pay-om{background:linear-gradient(135deg,#ea580c,#f97316);color:#fff}
+.pay-info{font-size:11px;color:var(--t4);text-align:center;line-height:1.5}
+
+/* HOOK */
+.hook{color:#fbbf24;font-size:14px;font-style:italic;font-weight:700;line-height:1.55}
+
+/* TAKEAWAYS */
+.tw-list{display:flex;flex-direction:column;gap:8px}
+.tw{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--t2);line-height:1.6;background:#060610;border-radius:9px;padding:11px 12px;border:1px solid var(--bo)}
+.tw-ck{color:var(--g);font-size:15px;font-weight:900;flex-shrink:0;margin-top:1px}
+.ch-t{font-family:'Sora',sans-serif;font-size:14px;font-weight:800;color:#fff;margin-bottom:8px;line-height:1.3}
+.ch-p{color:var(--t3);font-size:12px;line-height:1.75}
+
+/* SALES PAGE STEP */
+.sp-cover{border-radius:18px;overflow:hidden;margin-bottom:16px}
+.sp-cover-inner{padding:28px 22px}
+.sp-title{font-family:'Sora',sans-serif;font-size:clamp(20px,6vw,28px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:10px}
+.sp-sub{color:rgba(255,255,255,.7);font-size:14px;line-height:1.6;margin-bottom:16px}
+.sp-price-big{font-family:'Sora',sans-serif;font-size:36px;font-weight:900;color:#4ade80}
+.sp-price-label{font-size:12px;color:rgba(255,255,255,.5);margin-top:2px}
+.sp-features{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.sp-feat{display:flex;gap:10px;font-size:13px;color:var(--t2);line-height:1.5}
+.sp-feat-ck{color:var(--g);font-weight:900;flex-shrink:0}
+.sp-urgency{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.4);border-radius:10px;padding:12px 14px;font-size:12px;color:#fca5a5;text-align:center;margin-bottom:14px;font-weight:700}
+
+@supports(padding:max(0px)){main{padding-bottom:max(90px,calc(70px + env(safe-area-inset-bottom)))}}
+@media(min-width:460px){.dtypes{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:360px){h1.big{font-size:28px}.btn-big{font-size:16px;padding:19px 16px}.dn{font-size:12px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-ico">💸</div>
+    <div>
+      <div class="logo-n">PDF<span>Cash</span> IA</div>
+      <div class="logo-s">Idées → Argent en 30s</div>
+    </div>
+  </div>
+  <div class="hdr-r">
+    <button id="btn-back" class="hide">← Retour</button>
+    <span class="ai-badge">✨ IA</span>
+  </div>
+</header>
+
+<main>
+
+<!-- ══ HOME ══ -->
+<section id="s-home" class="step on">
+
+  <!-- COMPTEUR LIVE -->
+  <div class="counter-banner fu">
+    <div class="counter-left">
+      <span class="counter-fire">🔥</span>
+      <div>
+        <div class="counter-num" id="counter-num">0</div>
+        <div class="counter-label">PDFs générés</div>
+      </div>
+    </div>
+    <div class="counter-live">
+      <div class="live-dot"></div>
+      EN DIRECT
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-bottom:22px" class="fu" style="animation-delay:.05s">
+    <h1 class="big">Crée un PDF vendable<br><span class="grad">en 30 secondes ⚡</span></h1>
+    <p class="hero-sub">Tape ton idée → l'IA rédige tout → tu télécharges → tu vends sur WhatsApp.</p>
+  </div>
+
+  <div class="stats fu" style="animation-delay:.08s">
+    <div class="sbox"><div class="sn">⚡ 30s</div><div class="sl">Pour générer</div></div>
+    <div class="sbox"><div class="sn">5 000</div><div class="sl">FCFA prix moyen</div></div>
+    <div class="sbox"><div class="sn">♾️</div><div class="sl">Sujets possibles</div></div>
+  </div>
+
+  <div class="lbl fu" style="animation-delay:.1s">TYPE DE DOCUMENT</div>
+  <div class="dtypes fu" style="animation-delay:.12s">
+    <button class="dbtn sel" data-t="ebook" data-l="Ebook"><span class="di">📘</span><span class="dn">Ebook</span><span class="dp">💰 3 000–10 000 FCFA</span></button>
+    <button class="dbtn" data-t="guide" data-l="Guide Pratique"><span class="di">🎯</span><span class="dn">Guide Pratique</span><span class="dp">💰 2 000–8 000 FCFA</span></button>
+    <button class="dbtn" data-t="business_plan" data-l="Business Plan"><span class="di">💼</span><span class="dn">Business Plan</span><span class="dp">💰 5 000–20 000 FCFA</span></button>
+    <button class="dbtn" data-t="formation" data-l="Mini-Formation"><span class="di">🎓</span><span class="dn">Mini-Formation</span><span class="dp">💰 5 000–25 000 FCFA</span></button>
+    <button class="dbtn" data-t="tiktok" data-l="Scripts TikTok"><span class="di">🎬</span><span class="dn">Scripts TikTok</span><span class="dp">💰 1 500–4 000 FCFA</span></button>
+    <button class="dbtn" data-t="cv" data-l="CV Pro"><span class="di">📄</span><span class="dn">CV Pro</span><span class="dp">💰 2 000–5 000 FCFA</span></button>
+  </div>
+
+  <!-- CHOIX DE COULEUR -->
+  <div class="color-section fu" style="animation-delay:.15s">
+    <div class="lbl">🎨 COULEUR DE LA COUVERTURE</div>
+    <div class="color-grid" id="color-grid">
+      <button class="cbtn sel" data-c1="#1a0535" data-c2="#0d1030" data-a="#7c3aed" data-bar="linear-gradient(90deg,#7c3aed,#ec4899,#f59e0b)" style="background:linear-gradient(135deg,#1a0535,#0d1030)">
+        <div class="c-dot" style="background:linear-gradient(135deg,#7c3aed,#ec4899)"></div>
+        <div class="c-name">Violet</div>
+      </button>
+      <button class="cbtn" data-c1="#0a1628" data-c2="#051022" data-a="#3b82f6" data-bar="linear-gradient(90deg,#1d4ed8,#3b82f6,#06b6d4)" style="background:linear-gradient(135deg,#0a1628,#051022)">
+        <div class="c-dot" style="background:linear-gradient(135deg,#1d4ed8,#06b6d4)"></div>
+        <div class="c-name">Océan</div>
+      </button>
+      <button class="cbtn" data-c1="#0a2010" data-c2="#051508" data-a="#16a34a" data-bar="linear-gradient(90deg,#15803d,#22c55e,#86efac)" style="background:linear-gradient(135deg,#0a2010,#051508)">
+        <div class="c-dot" style="background:linear-gradient(135deg,#15803d,#22c55e)"></div>
+        <div class="c-name">Forêt</div>
+      </button>
+      <button class="cbtn" data-c1="#1a0a00" data-c2="#120800" data-a="#f59e0b" data-bar="linear-gradient(90deg,#b45309,#f59e0b,#fde68a)" style="background:linear-gradient(135deg,#1a0a00,#120800)">
+        <div class="c-dot" style="background:linear-gradient(135deg,#b45309,#f59e0b)"></div>
+        <div class="c-name">Or</div>
+      </button>
+      <button class="cbtn" data-c1="#1a0010" data-c2="#0d0008" data-a="#ec4899" data-bar="linear-gradient(90deg,#be185d,#ec4899,#f9a8d4)" style="background:linear-gradient(135deg,#1a0010,#0d0008)">
+        <div class="c-dot" style="background:linear-gradient(135deg,#be185d,#ec4899)"></div>
+        <div class="c-name">Rose</div>
+      </button>
+      <button class="cbtn" data-c1="#1a0500" data-c2="#0d0200" data-a="#ef4444" data-bar="linear-gradient(90deg,#b91c1c,#ef4444,#fca5a5)" style="background:linear-gradient(135deg,#1a0500,#0d0200)">
+        <div class="c-dot" style="background:linear-gradient(135deg,#b91c1c,#ef4444)"></div>
+        <div class="c-name">Rouge</div>
+      </button>
+      <button class="cbtn" data-c1="#0a0a10" data-c2="#050508" data-a="#94a3b8" data-bar="linear-gradient(90deg,#334155,#64748b,#cbd5e1)" style="background:linear-gradient(135deg,#0a0a10,#050508)">
+        <div class="c-dot" style="background:linear-gradient(135deg,#334155,#94a3b8)"></div>
+        <div class="c-name">Acier</div>
+      </button>
+      <button class="cbtn" data-c1="#100a00" data-c2="#080400" data-a="#fb923c" data-bar="linear-gradient(90deg,#c2410c,#fb923c,#fed7aa)" style="background:linear-gradient(135deg,#100a00,#080400)">
+        <div class="c-dot" style="background:linear-gradient(135deg,#c2410c,#fb923c)"></div>
+        <div class="c-name">Feu</div>
+      </button>
+    </div>
+  </div>
+
+  <div class="lbl fu" style="animation-delay:.18s">TON SUJET / IDÉE</div>
+  <textarea id="topic" rows="4" placeholder="Ex: Comment gagner de l'argent sur WhatsApp en Afrique..." class="fu" style="animation-delay:.2s"></textarea>
+
+  <div class="sugs fu" style="animation-delay:.22s">
+    <div class="sug-lbl">💡 IDÉES QUI VENDENT :</div>
+    <div class="sug-list">
+      <button class="sb">Gagner de l'argent en Afrique sans diplôme</button>
+      <button class="sb">Vendre sur WhatsApp et doubler ses revenus</button>
+      <button class="sb">Les 10 business avec 10 000 FCFA</button>
+      <button class="sb">Trouver des clients sur Instagram en Afrique</button>
+      <button class="sb">Secrets des freelances à 500 000 FCFA/mois</button>
+      <button class="sb">Créer une boutique en ligne sans argent</button>
+    </div>
+  </div>
+
+  <div id="err" class="err hide"></div>
+  <button id="btn-gen" class="btn-big fu" style="animation-delay:.26s" disabled>✍️ Écris ton sujet d'abord</button>
+</section>
+
+<!-- ══ GENERATING ══ -->
+<section id="s-gen" class="step">
+  <div class="gen-wrap fu">
+    <div class="robot">🤖</div>
+    <div class="gen-t">L'IA génère ton document...</div>
+    <div class="gen-sub" id="gen-topic"></div>
+    <div class="pbar-wrap"><div class="pbar" id="pbar"></div></div>
+    <div class="pct" id="pct">0%</div>
+    <div class="steps">
+      <div class="si">⏸️ Analyse du sujet</div>
+      <div class="si">⏸️ Rédaction des chapitres</div>
+      <div class="si">⏸️ Design professionnel</div>
+      <div class="si">⏸️ Calcul du potentiel</div>
+      <div class="si">⏸️ Emballage final</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PREVIEW ══ -->
+<section id="s-prev" class="step">
+
+  <div class="ok-bar fu">
+    <span class="ok-ico">🎉</span>
+    <div><div class="ok-t">Document généré avec succès !</div><div class="ok-s">Prêt à télécharger et vendre</div></div>
+  </div>
+
+  <!-- COVER avec couleur choisie -->
+  <div class="cover fu" id="p-cover" style="animation-delay:.08s">
+    <div class="cover-bar" id="p-cover-bar"></div>
+    <div class="cover-in">
+      <div class="c-badge" id="p-badge"></div>
+      <div class="c-title" id="p-title"></div>
+      <div class="c-sub" id="p-sub"></div>
+      <div class="c-tag" id="p-tag"></div>
+      <div class="c-price" id="p-price"></div>
+    </div>
+  </div>
+
+  <div class="card fu" style="animation-delay:.12s">
+    <span class="card-lbl">📋 TABLE DES MATIÈRES</span>
+    <div class="toc-list" id="p-toc"></div>
+  </div>
+
+  <div class="card fu" style="animation-delay:.15s">
+    <span class="card-lbl">👁️ APERÇU — CHAPITRE 1</span>
+    <div class="ch-t" id="p-ch-t"></div>
+    <p class="ch-p" id="p-ch-p"></p>
+  </div>
+
+  <div class="rev-card fu" style="animation-delay:.18s">
+    <div class="rev-lbl">💸 TON POTENTIEL DE REVENUS</div>
+    <div class="rev-grid">
+      <div class="rbox"><div class="rq">10 ventes</div><div class="ra" id="r10"></div></div>
+      <div class="rbox"><div class="rq">50 ventes</div><div class="ra" id="r50"></div></div>
+      <div class="rbox"><div class="rq">100 ventes</div><div class="ra" id="r100"></div></div>
+    </div>
+  </div>
+
+  <!-- PAIEMENT MANUEL -->
+  <div class="pay-box fu" style="animation-delay:.2s">
+    <div class="pay-title">💳 Encaisser le paiement</div>
+    <div class="pay-sub">Le client clique un bouton → WhatsApp s'ouvre avec TON numéro et le message déjà écrit → il paie → tu envoies le PDF.</div>
+    <div class="pay-methods" id="pay-methods" style="grid-template-columns:1fr 1fr 1fr">
+      <button class="pay-btn" id="btn-wave"   style="background:linear-gradient(135deg,#1d4ed8,#3b82f6);color:#fff">💙 Wave</button>
+      <button class="pay-btn" id="btn-om"     style="background:linear-gradient(135deg,#ea580c,#f97316);color:#fff">🟠 Orange Money</button>
+      <button class="pay-btn" id="btn-mtn"    style="background:linear-gradient(135deg,#ca8a04,#eab308);color:#000">💛 MTN MoMo</button>
+      <button class="pay-btn" id="btn-moov"   style="background:linear-gradient(135deg,#0369a1,#0ea5e9);color:#fff">🔵 Moov Money</button>
+      <button class="pay-btn" id="btn-airtel" style="background:linear-gradient(135deg,#b91c1c,#ef4444);color:#fff">🔴 Airtel Money</button>
+      <button class="pay-btn" id="btn-mpesa"  style="background:linear-gradient(135deg,#15803d,#22c55e);color:#fff">🟢 M-Pesa</button>
+    </div>
+    <div class="pay-info">📲 Client clique → WhatsApp s'ouvre avec ton numéro → il commande → tu envoies le PDF</div>
+  </div>
+
+  <div class="card fu" style="animation-delay:.22s">
+    <span class="card-lbl" style="color:#25d366">📲 MESSAGE WHATSAPP</span>
+    <p class="wa-msg" id="p-wa"></p>
+    <div class="wa-btns">
+      <button class="btn-copy" id="btn-copy">📋 Copier</button>
+      <a class="btn-wa" id="btn-wa" href="#" target="_blank">💬 WhatsApp</a>
+    </div>
+  </div>
+
+  <div class="card fu" style="animation-delay:.24s">
+    <span class="card-lbl" style="color:#f59e0b">🎬 ACCROCHE TIKTOK</span>
+    <p class="hook" id="p-tiktok"></p>
+  </div>
+
+  <div class="card fu" style="animation-delay:.26s">
+    <span class="card-lbl" style="color:#10b981">🎯 POINTS CLÉS</span>
+    <div class="tw-list" id="p-tw"></div>
+  </div>
+
+  <div class="fu" style="animation-delay:.28s">
+    <button class="btn-big" id="btn-dl">📥 Télécharger le PDF</button>
+    <button class="btn-green" id="btn-sp">📱 Créer la Page de Vente</button>
+    <button class="btn-mid" id="btn-new">⚡ Créer un autre PDF</button>
+    <button class="btn-sm" id="btn-rst">🔄 Recommencer</button>
+  </div>
+
+</section>
+
+<!-- ══ SALES PAGE ══ -->
+<section id="s-sale" class="step">
+
+  <div class="ok-bar fu">
+    <span class="ok-ico">📱</span>
+    <div><div class="ok-t">Page de vente créée !</div><div class="ok-s">Télécharge et partage sur WhatsApp</div></div>
+  </div>
+
+  <!-- Preview page de vente -->
+  <div class="sp-cover fu" id="sp-cover" style="animation-delay:.08s">
+    <div class="sp-cover-inner">
+      <div style="font-size:10px;color:rgba(255,255,255,.5);font-weight:700;letter-spacing:2px;margin-bottom:10px" id="sp-badge"></div>
+      <div class="sp-title" id="sp-title"></div>
+      <div class="sp-sub" id="sp-sub"></div>
+      <div class="sp-price-big" id="sp-price"></div>
+      <div class="sp-price-label">Prix de vente</div>
+    </div>
+  </div>
+
+  <div class="card fu" style="animation-delay:.12s">
+    <span class="card-lbl">✅ CE QUE LE CLIENT OBTIENT</span>
+    <div class="sp-features" id="sp-features"></div>
+  </div>
+
+  <div class="card fu" style="animation-delay:.15s">
+    <span class="card-lbl" style="color:#ef4444">⏰ URGENCE</span>
+    <div class="sp-urgency" id="sp-urgency"></div>
+  </div>
+
+  <div class="card fu" style="animation-delay:.18s">
+    <span class="card-lbl" style="color:#25d366">📲 MESSAGE DE VENTE COMPLET</span>
+    <p class="wa-msg" id="sp-wa-msg"></p>
+    <div class="wa-btns">
+      <button class="btn-copy" id="sp-btn-copy">📋 Copier</button>
+      <a class="btn-wa" id="sp-btn-wa" href="#" target="_blank">💬 Envoyer</a>
+    </div>
+  </div>
+
+  <div class="fu" style="animation-delay:.22s">
+    <button class="btn-big" id="btn-dl-sp">📥 Télécharger la Page HTML</button>
+    <button class="btn-mid" id="btn-back-prev">← Retour au PDF</button>
+    <button class="btn-sm" id="btn-rst2">🔄 Tout recommencer</button>
+  </div>
+
+</section>
+
+</main>
+
+<script>
+var S={
+  type:'ebook',label:'Ebook',topic:'',data:null,timer:null,
+  color:{c1:'#1a0535',c2:'#0d1030',accent:'#7c3aed',bar:'linear-gradient(90deg,#7c3aed,#ec4899,#f59e0b)'}
+};
+var STEPS=['Analyse du sujet','Rédaction des chapitres','Design professionnel','Calcul du potentiel','Emballage final'];
+
+// ── COUNTER ──
+var BASE_COUNT=12847;
+function loadCounter(){
+  var stored=localStorage.getItem('pdf_count');
+  var n=stored?parseInt(stored):BASE_COUNT;
+  animateCount(n);
+  return n;
+}
+function animateCount(target){
+  var el=document.getElementById('counter-num');
+  var start=Math.max(0,target-50);
+  var step=(target-start)/30;
+  var cur=start;
+  var t=setInterval(function(){
+    cur+=step;
+    if(cur>=target){cur=target;clearInterval(t);}
+    el.textContent=Math.round(cur).toLocaleString('fr-FR');
+  },30);
+}
+function incrementCounter(){
+  var stored=localStorage.getItem('pdf_count');
+  var n=(stored?parseInt(stored):BASE_COUNT)+1;
+  localStorage.setItem('pdf_count',n);
+  animateCount(n);
+}
+
+function g(id){return document.getElementById(id)}
+
+function show(id){
+  ['s-home','s-gen','s-prev','s-sale'].forEach(function(x){
+    var el=g(x);el.classList.remove('on');el.style.display='none';
+  });
+  var el=g(id);el.classList.add('on');el.style.display='block';
+  g('btn-back').classList.toggle('hide',id==='s-home');
+  window.scrollTo(0,0);
+}
+
+function rev(p,q){
+  var n=parseInt((p||'3000').replace(/\D/g,''))||3000;
+  return (n*q).toLocaleString('fr-FR')+' FCFA';
+}
+
+function setSteps(idx){
+  var all=document.querySelectorAll('.si');
+  all.forEach(function(el,i){
+    el.classList.remove('done','cur');
+    if(i<idx){el.classList.add('done');el.textContent='✅ '+STEPS[i];}
+    else if(i===idx){el.classList.add('cur');el.textContent='⚡ '+STEPS[i];}
+    else{el.textContent='⏸️ '+STEPS[i];}
+  });
+}
+
+function startBar(){
+  var p=0,li=-1;
+  g('pbar').style.width='0%';g('pct').textContent='0%';setSteps(-1);
+  S.timer=setInterval(function(){
+    p+=Math.random()*5+1;if(p>92)p=92;
+    var r=Math.round(p);
+    g('pbar').style.width=r+'%';g('pct').textContent=r+'%';
+    var ni=Math.min(Math.floor(p/20),4);
+    if(ni!==li){li=ni;setSteps(ni);}
+  },380);
+}
+function stopBar(){
+  clearInterval(S.timer);
+  g('pbar').style.width='100%';g('pct').textContent='100%';setSteps(5);
+}
+
+function updateBtn(){
+  var v=g('topic').value.trim();
+  var b=g('btn-gen');
+  if(v){b.disabled=false;b.textContent='⚡ Générer mon '+S.label;}
+  else{b.disabled=true;b.textContent='✍️ Écris ton sujet d\'abord';}
+}
+
+function showErr(m){
+  var el=g('err');el.textContent='⚠️ '+m;el.classList.remove('hide');
+  setTimeout(function(){el.classList.add('hide');},6000);
+}
+
+async function generate(){
+  var topic=g('topic').value.trim();
+  if(!topic)return;
+  S.topic=topic;
+  g('err').classList.add('hide');
+  g('gen-topic').textContent='« '+(topic.length>55?topic.slice(0,55)+'...':topic)+' »';
+  show('s-gen');startBar();
+
+  try{
+    var res=await fetch('/api/generate',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({topic:S.topic,docType:S.type,docLabel:S.label})
+    });
+    var d=await res.json().catch(function(){return{error:'Réponse invalide'};});
+    if(!res.ok){
+      var msg=d.error||'Erreur ('+res.status+')';
+      if(res.status===404)msg='Fonction API introuvable. Vérifie que api/generate.js est dans GitHub.';
+      throw new Error(msg);
+    }
+    if(!d.title)throw new Error('Réponse IA incomplète. Réessaie !');
+    S.data=d;
+    stopBar();
+    incrementCounter();
+    setTimeout(function(){render(d);show('s-prev');},600);
+  }catch(e){
+    stopBar();show('s-home');showErr(e.message||'Erreur inconnue. Réessaie !');
+  }
+}
+
+function applyColor(){
+  var c=S.color;
+  var cover=g('p-cover');
+  cover.style.background='linear-gradient(145deg,'+c.c1+','+c.c2+')';
+  cover.style.border='1px solid '+c.accent+'44';
+  g('p-cover-bar').style.background=c.bar;
+}
+
+function render(d){
+  applyColor();
+  g('p-badge').textContent='✦ '+S.label.toUpperCase()+' ✦';
+  g('p-title').textContent=d.title||'';
+  g('p-sub').textContent=d.subtitle||'';
+  g('p-tag').textContent='\u201c'+(d.tagline||'')+'\u201d';
+  g('p-price').textContent='💰 Prix conseillé : '+(d.price_suggested||'');
+
+  var toc=g('p-toc');toc.innerHTML='';
+  (d.table_of_contents||[]).slice(0,7).forEach(function(it,i){
+    toc.innerHTML+='<div class="toc-row"><span class="toc-n">'+(i+1)+'.</span><span>'+it+'</span></div>';
+  });
+
+  var ch=(d.chapters||[])[0];
+  if(ch){g('p-ch-t').textContent=ch.title||'';g('p-ch-p').textContent=(ch.content||'').slice(0,260)+'... [contenu complet dans le PDF]';}
+
+  g('r10').textContent=rev(d.price_suggested,10);
+  g('r50').textContent=rev(d.price_suggested,50);
+  g('r100').textContent=rev(d.price_suggested,100);
+
+  var msg=d.sales_message||'';
+  g('p-wa').textContent=msg;
+  g('btn-wa').href='https://wa.me/?text='+encodeURIComponent(msg);
+  g('p-tiktok').textContent='\u201c'+(d.viral_hook||'')+'\u201d';
+
+  var tw=g('p-tw');tw.innerHTML='';
+  (d.key_takeaways||[]).forEach(function(t){
+    tw.innerHTML+='<div class="tw"><span class="tw-ck">✓</span><span>'+t+'</span></div>';
+  });
+}
+
+function renderSalesPage(){
+  var d=S.data;if(!d)return;
+  var c=S.color;
+  var sp=g('sp-cover');
+  sp.style.background='linear-gradient(145deg,'+c.c1+','+c.c2+')';
+
+  g('sp-badge').textContent='✦ '+S.label.toUpperCase()+' ✦';
+  g('sp-title').textContent=d.title||'';
+  g('sp-sub').textContent=d.description||d.subtitle||'';
+  g('sp-price').textContent=d.price_suggested||'';
+
+  var feats=g('sp-features');feats.innerHTML='';
+  var items=['✅ Document complet prêt à appliquer','✅ Exemples concrets avec montants en FCFA','✅ Conseils exclusifs introuvables gratuitement','✅ Livré immédiatement sur WhatsApp','✅ Garantie satisfaction ou remboursé'];
+  items.forEach(function(it){
+    feats.innerHTML+='<div class="sp-feat"><span class="sp-feat-ck">✓</span><span>'+it.replace('✅ ','')+'</span></div>';
+  });
+
+  var urgency='⚠️ Offre limitée — Prix normal : '+multiplyPrice(d.price_suggested,2)+' — Aujourd\'hui seulement : '+d.price_suggested;
+  g('sp-urgency').textContent=urgency;
+
+  var fullMsg='🔥 '+d.title+'\n\n'+(d.description||d.subtitle)+'\n\n✅ Ce que tu vas apprendre :\n'+(d.table_of_contents||[]).slice(0,3).map(function(t){return'• '+t;}).join('\n')+'\n\n💰 Prix : '+d.price_suggested+' seulement\n\n📲 Envoie "JE VEUX" pour recevoir ton exemplaire maintenant !\n\n⚠️ Places limitées';
+  g('sp-wa-msg').textContent=fullMsg;
+  g('sp-btn-wa').href='https://wa.me/?text='+encodeURIComponent(fullMsg);
+  g('sp-btn-copy').onclick=function(){
+    navigator.clipboard&&navigator.clipboard.writeText(fullMsg).catch(function(){});
+    g('sp-btn-copy').textContent='✅ Copié !';g('sp-btn-copy').classList.add('ok');
+    setTimeout(function(){g('sp-btn-copy').textContent='📋 Copier';g('sp-btn-copy').classList.remove('ok');},2000);
+  };
+}
+
+function multiplyPrice(p,mult){
+  var n=parseInt((p||'3000').replace(/\D/g,''))||3000;
+  return (n*mult).toLocaleString('fr-FR')+' FCFA';
+}
+
+function buildPDF(d){
+  var c=S.color;
+  var pn=parseInt((d.price_suggested||'3000').replace(/\D/g,''))||3000;
+  var chs=(d.chapters||[]).map(function(ch,i){
+    return '<div class="ch'+(i>0?' pb':'')+'"><div class="cn">CHAPITRE '+String(i+1).padStart(2,'0')+'</div>'
+    +'<div class="ct" style="border-left:5px solid '+c.accent+';background:linear-gradient(135deg,'+c.c1+','+c.c2+')">'+ch.title+'</div>'
+    +'<div class="cc">'+(ch.content||'').split('\n').filter(Boolean).map(function(p){return'<p>'+p+'</p>';}).join('')+'</div></div>';
+  }).join('');
+  var tocs=(d.table_of_contents||[]).map(function(t,i){
+    return '<div class="tr"><span class="tn" style="color:'+c.accent+'">'+String(i+1).padStart(2,'0')+'</span><span>'+t+'</span></div>';
+  }).join('');
+  var kps=(d.key_takeaways||[]).map(function(k){
+    return '<div class="kp"><span class="kck">✓</span><span>'+k+'</span></div>';
+  }).join('');
+  return'<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>'+d.title+'</title>'
+  +'<link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800;900&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">'
+  +'<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:"DM Sans",sans-serif;background:#fff;color:#111}.pb{page-break-before:always}'
+  +'.cover{min-height:100vh;background:linear-gradient(145deg,'+c.c1+','+c.c2+');display:flex;flex-direction:column;page-break-after:always}'
+  +'.cbar{height:7px;background:'+c.bar+';flex-shrink:0}'
+  +'.cbody{flex:1;padding:52px 48px 36px}'
+  +'.cbadge{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:30px;padding:7px 20px;color:#fff;font-family:"Sora",sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:32px}'
+  +'.ctitle{font-family:"Sora",sans-serif;font-size:38px;font-weight:900;color:#fff;line-height:1.15;margin-bottom:16px;max-width:500px}'
+  +'.csub{font-size:15px;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:22px;max-width:440px}'
+  +'.ctag{font-style:italic;color:rgba(255,255,255,.8);font-size:14px;border-left:4px solid rgba(255,255,255,.4);padding-left:16px;margin-bottom:32px;line-height:1.6}'
+  +'.cprice{display:inline-flex;align-items:center;gap:10px;background:rgba(16,185,129,.2);border:1px solid rgba(16,185,129,.5);border-radius:11px;padding:13px 20px;color:#4ade80;font-family:"Sora",sans-serif;font-weight:700;font-size:14px}'
+  +'.cfoot{background:rgba(0,0,0,.35);padding:20px 48px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0}'
+  +'.cauth{color:rgba(255,255,255,.4);font-size:12px}.cbrand{color:'+c.accent+';font-family:"Sora",sans-serif;font-size:12px;font-weight:700}'
+  +'.inner{padding:28mm 22mm 26mm;page-break-after:always}'
+  +'.ph{display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;margin-bottom:30px;border-bottom:2px solid '+c.accent+'}'
+  +'.ph1{font-family:"Sora",sans-serif;font-size:9px;color:'+c.accent+';font-weight:700;letter-spacing:2px;text-transform:uppercase}'
+  +'.ph2{font-size:9px;color:#9ca3af;font-family:"Sora",sans-serif}'
+  +'.h2{font-family:"Sora",sans-serif;font-size:26px;font-weight:900;color:#111;margin-bottom:6px}'
+  +'.hline{width:60px;height:4px;background:'+c.bar+';border-radius:2px;margin-bottom:26px}'
+  +'.tr{display:flex;gap:14px;align-items:flex-start;padding:11px 14px;margin-bottom:5px;border-radius:8px;background:#f9fafb;border:1px solid #f0f0f0}'
+  +'.tn{font-family:"Sora",sans-serif;font-weight:900;font-size:18px;min-width:30px;flex-shrink:0}'
+  +'.cn{font-family:"Sora",sans-serif;font-size:9px;font-weight:700;color:#9ca3af;letter-spacing:4px;margin-bottom:8px}'
+  +'.ct{font-family:"Sora",sans-serif;font-size:24px;font-weight:900;color:#fff;line-height:1.2;padding:20px 24px;border-radius:0 11px 11px 0;margin-bottom:24px}'
+  +'.cc p{font-size:13px;color:#374151;line-height:1.85;margin-bottom:13px;text-align:justify}'
+  +'.kp{display:flex;gap:12px;align-items:flex-start;padding:13px 16px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:9px;margin-bottom:9px}'
+  +'.kck{color:#10b981;font-weight:900;font-size:15px;flex-shrink:0}.kp span:last-child{font-size:13px;color:#166534;line-height:1.5}'
+  +'.ctabox{background:linear-gradient(135deg,'+c.c1+','+c.c2+');border:2px solid '+c.accent+';border-radius:16px;padding:32px;text-align:center;margin-bottom:24px}'
+  +'.ctat{font-family:"Sora",sans-serif;font-size:20px;font-weight:900;color:#fff;margin-bottom:10px}'
+  +'.ctap{font-family:"Sora",sans-serif;font-size:17px;font-weight:700;color:#4ade80}'
+  +'.rg{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}'
+  +'.rc{background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;padding:14px;text-align:center}'
+  +'.rq{font-size:10px;color:#9ca3af;margin-bottom:4px}.ra{font-family:"Sora",sans-serif;font-size:15px;font-weight:900;color:#10b981}'
+  +'.brand{text-align:center;padding-top:20px;border-top:1px solid #e5e7eb;color:#9ca3af;font-size:9px;margin-top:20px}'
+  +'</style></head><body>'
+  +'<div class="cover"><div class="cbar"></div><div class="cbody">'
+  +'<div class="cbadge">✦ '+S.label+' ✦</div>'
+  +'<div class="ctitle">'+d.title+'</div>'
+  +'<div class="csub">'+(d.subtitle||'')+'</div>'
+  +'<div class="ctag">"'+(d.tagline||'')+'"</div>'
+  +'<div class="cprice">💰 Prix conseillé : '+(d.price_suggested||'')+'</div>'
+  +'</div><div class="cfoot"><div class="cauth">Par '+(d.author||'Expert Digital')+'</div><div class="cbrand">PDF Cash IA ✦</div></div></div>'
+  +'<div class="inner"><div class="ph"><span class="ph1">'+(d.title||'').slice(0,40)+'</span><span class="ph2">TABLE DES MATIÈRES</span></div>'
+  +'<div class="h2">Table des Matières</div><div class="hline"></div>'+tocs+'</div>'
+  +chs
+  +'<div class="inner pb"><div class="ph"><span class="ph1">'+(d.title||'').slice(0,40)+'</span><span class="ph2">POINTS CLÉS</span></div>'
+  +'<div class="h2">Points Clés</div><div class="hline"></div>'+kps+'</div>'
+  +'<div class="inner pb"><div class="ph"><span class="ph1">'+(d.title||'').slice(0,40)+'</span><span class="ph2">CONCLUSION</span></div>'
+  +'<div class="ctabox"><div class="ctat">🚀 '+(d.call_to_action||'Passe à l\'action !')+'</div><div class="ctap">💰 '+(d.price_suggested||'')+'</div></div>'
+  +'<div style="font-family:\'Sora\',sans-serif;font-size:12px;font-weight:700;color:#374151;margin-bottom:10px">📊 TON POTENTIEL</div>'
+  +'<div class="rg"><div class="rc"><div class="rq">10 ventes</div><div class="ra">'+(pn*10).toLocaleString('fr-FR')+' FCFA</div></div>'
+  +'<div class="rc"><div class="rq">50 ventes</div><div class="ra">'+(pn*50).toLocaleString('fr-FR')+' FCFA</div></div>'
+  +'<div class="rc"><div class="rq">100 ventes</div><div class="ra">'+(pn*100).toLocaleString('fr-FR')+' FCFA</div></div></div>'
+  +'<div class="brand">Créé avec PDF Cash IA 💸</div></div>'
+  +'</body></html>';
+}
+
+function buildSalesPageHTML(d){
+  var c=S.color;
+  var fullMsg='🔥 '+d.title+'\n\n'+(d.description||d.subtitle||'')+'\n\n'+(d.table_of_contents||[]).slice(0,3).map(function(t){return'✅ '+t;}).join('\n')+'\n\n💰 Prix : '+d.price_suggested+'\n\n📲 Envoie "JE VEUX" maintenant !';
+  return'<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+d.title+'</title>'
+  +'<link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800;900&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">'
+  +'<style>*{box-sizing:border-box;margin:0;padding:0}html,body{background:#060610;color:#fff;font-family:"DM Sans",sans-serif;min-height:100vh}'
+  +'.top-bar{height:5px;background:'+c.bar+'}'
+  +'.hero{background:linear-gradient(145deg,'+c.c1+','+c.c2+');padding:48px 24px 40px;text-align:center}'
+  +'.badge{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:6px 16px;font-size:11px;color:#fff;font-weight:700;letter-spacing:2px;margin-bottom:20px}'
+  +'.title{font-family:"Sora",sans-serif;font-size:clamp(26px,7vw,42px);font-weight:900;color:#fff;line-height:1.15;margin-bottom:14px}'
+  +'.sub{font-size:16px;color:rgba(255,255,255,.7);line-height:1.65;margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto}'
+  +'.price-box{display:inline-flex;flex-direction:column;align-items:center;background:rgba(16,185,129,.15);border:2px solid rgba(16,185,129,.4);border-radius:16px;padding:18px 32px}'
+  +'.price-old{font-size:14px;color:rgba(255,255,255,.4);text-decoration:line-through;margin-bottom:4px}'
+  +'.price-now{font-family:"Sora",sans-serif;font-size:36px;font-weight:900;color:#4ade80}'
+  +'.price-label{font-size:11px;color:rgba(255,255,255,.5);margin-top:4px}'
+  +'.body{max-width:540px;margin:0 auto;padding:32px 20px 80px}'
+  +'.urgency{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.4);border-radius:12px;padding:14px 18px;font-size:13px;color:#fca5a5;text-align:center;font-weight:700;margin-bottom:24px}'
+  +'.section-title{font-family:"Sora",sans-serif;font-size:18px;font-weight:900;color:#fff;margin-bottom:16px}'
+  +'.feat{display:flex;gap:12px;align-items:flex-start;padding:14px;background:#0f0f1e;border:1px solid #2a2a45;border-radius:12px;margin-bottom:8px;font-size:14px;color:#e2e2f0;line-height:1.5}'
+  +'.feat-ck{color:#10b981;font-weight:900;font-size:16px;flex-shrink:0}'
+  +'.toc-item{display:flex;gap:10px;padding:12px 14px;background:#0f0f1e;border:1px solid #2a2a45;border-radius:10px;margin-bottom:6px;font-size:13px;color:#e2e2f0}'
+  +'.toc-n{color:'+c.accent+';font-weight:800;font-family:"Sora",sans-serif;min-width:22px}'
+  +'.cta-box{background:linear-gradient(135deg,'+c.c1+','+c.c2+');border:2px solid '+c.accent+';border-radius:18px;padding:28px;text-align:center;margin:24px 0}'
+  +'.cta-title{font-family:"Sora",sans-serif;font-size:20px;font-weight:900;color:#fff;margin-bottom:8px}'
+  +'.cta-sub{font-size:13px;color:rgba(255,255,255,.6);margin-bottom:18px;line-height:1.6}'
+  +'.btn-wa{display:block;background:linear-gradient(135deg,#059669,#10b981);border-radius:14px;padding:18px;color:#fff;font-family:"Sora",sans-serif;font-size:17px;font-weight:900;text-decoration:none;text-align:center}'
+  +'.msg-box{background:#0f0f1e;border:1px solid #2a2a45;border-radius:12px;padding:16px;font-size:13px;color:#9ca3af;line-height:1.7;white-space:pre-wrap;margin-bottom:16px}'
+  +'.brand{text-align:center;font-size:10px;color:#5a5a78;padding-top:20px;border-top:1px solid #2a2a45}'
+  +'</style></head><body>'
+  +'<div class="top-bar"></div>'
+  +'<div class="hero">'
+  +'<div class="badge">✦ '+S.label.toUpperCase()+' ✦</div>'
+  +'<div class="title">'+d.title+'</div>'
+  +'<div class="sub">'+(d.subtitle||'')+'</div>'
+  +'<div class="price-box"><div class="price-old">'+multiplyPrice(d.price_suggested,2)+'</div><div class="price-now">'+d.price_suggested+'</div><div class="price-label">Prix spécial aujourd\'hui</div></div>'
+  +'</div>'
+  +'<div class="body">'
+  +'<div class="urgency">⚠️ Offre limitée — Ce prix ne durera pas longtemps !</div>'
+  +'<div class="section-title">✅ Ce que tu vas obtenir</div>'
+  +(d.key_takeaways||[]).map(function(k){return'<div class="feat"><span class="feat-ck">✓</span><span>'+k+'</span></div>';}).join('')
+  +'<br><div class="section-title">📋 Au programme</div>'
+  +(d.table_of_contents||[]).map(function(t,i){return'<div class="toc-item"><span class="toc-n">'+(i+1)+'.</span><span>'+t+'</span></div>';}).join('')
+  +'<div class="cta-box"><div class="cta-title">🚀 Prêt à passer à l\'action ?</div>'
+  +'<div class="cta-sub">Envoie ce message sur WhatsApp pour commander maintenant</div>'
+  +'<a class="btn-wa" href="https://wa.me/?text='+encodeURIComponent('Je veux commander : '+d.title+' — '+d.price_suggested)+'">💬 Commander sur WhatsApp</a></div>'
+  +'<div class="section-title" style="margin-top:24px">📲 Message prêt à copier</div>'
+  +'<div class="msg-box">'+fullMsg+'</div>'
+  +'<div class="brand">Page créée avec PDF Cash IA 💸</div>'
+  +'</div></body></html>';
+}
+
+function dlFile(html,name){
+  var ov=document.createElement('div');
+  ov.style.cssText='position:fixed;inset:0;z-index:999;background:rgba(6,6,16,.97);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px';
+  ov.innerHTML='<div style="font-size:60px;margin-bottom:20px">📥</div><h3 style="font-family:\'Sora\',sans-serif;font-size:20px;font-weight:900;color:#fff;margin-bottom:8px">Téléchargement...</h3><p style="color:#9898b8;font-size:13px">Ouvre dans Chrome → Imprimer → Enregistrer en PDF</p>';
+  document.body.appendChild(ov);
+  setTimeout(function(){
+    var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');
+    a.href=url;a.download=name;
+    document.body.appendChild(a);a.click();
+    document.body.removeChild(a);URL.revokeObjectURL(url);
+    document.body.removeChild(ov);
+  },700);
+}
+
+function reset(){S.data=null;g('topic').value='';updateBtn();show('s-home');}
+
+// ── EVENTS ──
+document.querySelectorAll('.dbtn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.dbtn').forEach(function(b){b.classList.remove('sel');});
+    btn.classList.add('sel');
+    S.type=btn.dataset.t;S.label=btn.dataset.l;updateBtn();
+  });
+});
+
+document.querySelectorAll('.cbtn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.cbtn').forEach(function(b){b.classList.remove('sel');});
+    btn.classList.add('sel');
+    S.color={c1:btn.dataset.c1,c2:btn.dataset.c2,accent:btn.dataset.a,bar:btn.dataset.bar};
+  });
+});
+
+g('topic').addEventListener('input',updateBtn);
+
+document.querySelectorAll('.sb').forEach(function(btn){
+  btn.addEventListener('click',function(){g('topic').value=btn.textContent;updateBtn();});
+});
+
+g('btn-gen').addEventListener('click',generate);
+
+g('btn-back').addEventListener('click',function(){
+  if(document.getElementById('s-sale').classList.contains('on'))show('s-prev');
+  else reset();
+});
+
+g('btn-dl').addEventListener('click',function(){
+  if(!S.data)return;
+  dlFile(buildPDF(S.data),((S.data.title||'document').replace(/[^\w\s]/g,'').replace(/\s+/g,'_').slice(0,40))+'.html');
+});
+
+g('btn-sp').addEventListener('click',function(){
+  if(!S.data)return;
+  renderSalesPage();
+  show('s-sale');
+});
+
+g('btn-dl-sp').addEventListener('click',function(){
+  if(!S.data)return;
+  dlFile(buildSalesPageHTML(S.data),'page-vente-'+((S.data.title||'doc').replace(/[^\w\s]/g,'').replace(/\s+/g,'_').slice(0,30))+'.html');
+});
+
+g('btn-copy').addEventListener('click',function(){
+  navigator.clipboard&&navigator.clipboard.writeText(g('p-wa').textContent).catch(function(){});
+  g('btn-copy').textContent='✅ Copié !';g('btn-copy').classList.add('ok');
+  setTimeout(function(){g('btn-copy').textContent='📋 Copier';g('btn-copy').classList.remove('ok');},2000);
+});
+
+// ── TON NUMÉRO WHATSAPP ──
+var MON_WA='22996830775';
+
+function openWA(method){
+  var d=S.data;if(!d)return;
+  var msg='Bonjour !\n\nJe souhaite commander :\n\n* '+d.title+' *\n\nPrix : '+d.price_suggested+'\nPaiement : '+method+'\n\nMerci de m\'envoyer tes coordonnées de paiement.\nJe t\'envoie la preuve dès que c\'est fait.';
+  window.open('https://wa.me/'+MON_WA+'?text='+encodeURIComponent(msg),'_blank');
+}
+
+g('btn-wave').addEventListener('click',function(){openWA('Wave');});
+g('btn-om').addEventListener('click',function(){openWA('Orange Money');});
+g('btn-mtn').addEventListener('click',function(){openWA('MTN MoMo');});
+g('btn-moov').addEventListener('click',function(){openWA('Moov Money');});
+g('btn-airtel').addEventListener('click',function(){openWA('Airtel Money');});
+g('btn-mpesa').addEventListener('click',function(){openWA('M-Pesa');});
+
+g('btn-new').addEventListener('click',function(){g('topic').value='';updateBtn();show('s-home');});
+g('btn-rst').addEventListener('click',reset);
+g('btn-back-prev').addEventListener('click',function(){show('s-prev');});
+g('btn-rst2').addEventListener('click',reset);
+
+// ── INIT ──
+loadCounter();
+show('s-home');
+updateBtn();
+</script>
+</body>
+</html>
