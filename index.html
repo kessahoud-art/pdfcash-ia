@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr" style="background:#060610;color-scheme:dark;">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#060610" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="PDFCash IA" />
+  <meta name="description" content="Crée un PDF vendable en 30 secondes avec l'IA. Ebook, guide, business plan prêt à vendre sur WhatsApp." />
+  <title>PDFCash IA — Crée &amp; Vends des PDFs en 30s</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Extra force dark — overrides any browser/system light mode injection */
+    html, body { background: #060610 !important; color: #ffffff !important; }
+  </style>
+</head>
+<body style="background:#060610;color:#fff;">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">
+      <div class="logo-mark">💸</div>
+      <div>
+        <span class="logo-name">PDF<span class="accent">Cash</span> IA</span>
+        <span class="logo-sub">Idées → Argent en 30s</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <button id="btn-reset" class="btn-ghost hidden">← Nouveau</button>
+      <span class="badge-ai">✨ IA</span>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- ══ STEP HOME ══ -->
+    <section id="step-home" class="step active">
+
+      <div class="hero fade-up">
+        <div class="hero-pill">🔥 +2 400 PDFs vendus cette semaine</div>
+        <h1 class="hero-title">
+          Crée un PDF vendable<br/>
+          <span class="gradient-text">en 30 secondes ⚡</span>
+        </h1>
+        <p class="hero-sub">Tape ton idée → l'IA rédige tout → tu télécharges → tu vends sur WhatsApp.</p>
+      </div>
+
+      <div class="stats-grid fade-up" style="animation-delay:.08s">
+        <div class="stat-card">
+          <div class="stat-n">⚡ 30s</div>
+          <div class="stat-l">Pour générer</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n">5 000</div>
+          <div class="stat-l">FCFA prix moyen</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n">♾️</div>
+          <div class="stat-l">Sujets possibles</div>
+        </div>
+      </div>
+
+      <div class="section-label fade-up" style="animation-delay:.12s">CHOISIS TON TYPE DE DOCUMENT</div>
+
+      <div id="doc-types" class="doc-types fade-up" style="animation-delay:.16s">
+        <button class="doc-btn active" data-type="ebook" data-label="Ebook">
+          <span class="doc-icon">📘</span>
+          <span class="doc-name">Ebook</span>
+          <span class="doc-price">💰 3 000 – 10 000 FCFA</span>
+        </button>
+        <button class="doc-btn" data-type="guide" data-label="Guide Pratique">
+          <span class="doc-icon">🎯</span>
+          <span class="doc-name">Guide Pratique</span>
+          <span class="doc-price">💰 2 000 – 8 000 FCFA</span>
+        </button>
+        <button class="doc-btn" data-type="business_plan" data-label="Business Plan">
+          <span class="doc-icon">💼</span>
+          <span class="doc-name">Business Plan</span>
+          <span class="doc-price">💰 5 000 – 20 000 FCFA</span>
+        </button>
+        <button class="doc-btn" data-type="formation" data-label="Mini-Formation">
+          <span class="doc-icon">🎓</span>
+          <span class="doc-name">Mini-Formation</span>
+          <span class="doc-price">💰 5 000 – 25 000 FCFA</span>
+        </button>
+        <button class="doc-btn" data-type="tiktok_script" data-label="Scripts TikTok">
+          <span class="doc-icon">🎬</span>
+          <span class="doc-name">Scripts TikTok</span>
+          <span class="doc-price">💰 1 500 – 4 000 FCFA</span>
+        </button>
+        <button class="doc-btn" data-type="cv" data-label="CV Pro">
+          <span class="doc-icon">📄</span>
+          <span class="doc-name">CV Pro</span>
+          <span class="doc-price">💰 2 000 – 5 000 FCFA</span>
+        </button>
+      </div>
+
+      <div class="section-label fade-up" style="animation-delay:.2s">TON SUJET / IDÉE</div>
+      <textarea id="topic-input" class="topic-input fade-up" style="animation-delay:.22s"
+        placeholder="Ex: Comment gagner de l'argent sur WhatsApp en Afrique..."
+        rows="4"
+      ></textarea>
+
+      <div class="suggestions fade-up" style="animation-delay:.26s">
+        <div class="suggestions-label">💡 IDÉES QUI VENDENT :</div>
+        <div class="suggestions-list">
+          <button class="sug-btn">Gagner de l'argent en Afrique sans diplôme</button>
+          <button class="sug-btn">Vendre sur WhatsApp et doubler ses revenus</button>
+          <button class="sug-btn">Les 10 business avec 10 000 FCFA</button>
+          <button class="sug-btn">Trouver des clients sur Instagram en Afrique</button>
+          <button class="sug-btn">Secrets des freelances à 500 000 FCFA/mois</button>
+          <button class="sug-btn">Créer une boutique en ligne sans argent</button>
+        </div>
+      </div>
+
+      <div id="error-box" class="error-box hidden"></div>
+
+      <button id="btn-generate" class="btn-generate fade-up" style="animation-delay:.3s" disabled>
+        ✍️ Écris ton sujet d'abord
+      </button>
+
+    </section>
+
+    <!-- ══ STEP GENERATING ══ -->
+    <section id="step-generating" class="step hidden">
+      <div class="generating-wrap fade-up">
+        <div class="robot-icon">🤖</div>
+        <h2 class="gen-title">L'IA génère ton document...</h2>
+        <p id="gen-topic" class="gen-topic"></p>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <div class="progress-pct" id="progress-pct">0%</div>
+        <div class="steps-list">
+          <div class="step-item" data-idx="0">⏸️ Analyse du sujet</div>
+          <div class="step-item" data-idx="1">⏸️ Rédaction des chapitres</div>
+          <div class="step-item" data-idx="2">⏸️ Design professionnel</div>
+          <div class="step-item" data-idx="3">⏸️ Calcul du potentiel</div>
+          <div class="step-item" data-idx="4">⏸️ Emballage final</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ STEP PREVIEW ══ -->
+    <section id="step-preview" class="step hidden">
+
+      <div class="success-banner fade-up">
+        <span class="success-icon">🎉</span>
+        <div>
+          <div class="success-title">Document généré avec succès !</div>
+          <div class="success-sub">Ton produit digital est prêt à être vendu</div>
+        </div>
+      </div>
+
+      <!-- Cover -->
+      <div class="cover-card fade-up" style="animation-delay:.08s">
+        <div class="cover-top-bar"></div>
+        <div class="cover-body">
+          <div class="cover-badge" id="preview-type-badge"></div>
+          <h2 class="cover-title" id="preview-title"></h2>
+          <p class="cover-subtitle" id="preview-subtitle"></p>
+          <div class="cover-tagline" id="preview-tagline"></div>
+          <div class="cover-price" id="preview-price"></div>
+        </div>
+      </div>
+
+      <!-- TOC -->
+      <div class="info-card fade-up" style="animation-delay:.12s">
+        <span class="info-label">📋 TABLE DES MATIÈRES</span>
+        <div id="preview-toc" class="toc-list"></div>
+      </div>
+
+      <!-- Chapter 1 preview -->
+      <div class="info-card fade-up" style="animation-delay:.16s">
+        <span class="info-label">👁️ APERÇU — CHAPITRE 1</span>
+        <div class="chapter-preview-title" id="preview-ch-title"></div>
+        <p class="chapter-preview-text" id="preview-ch-text"></p>
+      </div>
+
+      <!-- Revenue -->
+      <div class="revenue-card fade-up" style="animation-delay:.2s">
+        <div class="revenue-label">💸 TON POTENTIEL DE REVENUS</div>
+        <div class="revenue-grid">
+          <div class="rev-box"><div class="rev-qty">10 ventes</div><div class="rev-amt" id="rev-10"></div></div>
+          <div class="rev-box"><div class="rev-qty">50 ventes</div><div class="rev-amt" id="rev-50"></div></div>
+          <div class="rev-box"><div class="rev-qty">100 ventes</div><div class="rev-amt" id="rev-100"></div></div>
+        </div>
+      </div>
+
+      <!-- WhatsApp -->
+      <div class="info-card fade-up" style="animation-delay:.24s">
+        <span class="info-label" style="color:#25d366">📲 MESSAGE WHATSAPP PRÊT À ENVOYER</span>
+        <p class="wa-message" id="preview-wa-msg"></p>
+        <div class="wa-actions">
+          <button id="btn-copy-msg" class="btn-copy">📋 Copier</button>
+          <a id="btn-wa-share" class="btn-wa" href="#" target="_blank">💬 WhatsApp</a>
+        </div>
+      </div>
+
+      <!-- TikTok -->
+      <div class="info-card fade-up" style="animation-delay:.27s">
+        <span class="info-label" style="color:#f59e0b">🎬 ACCROCHE TIKTOK VIRALE</span>
+        <p class="tiktok-hook" id="preview-tiktok"></p>
+      </div>
+
+      <!-- Key takeaways -->
+      <div class="info-card fade-up" style="animation-delay:.3s">
+        <span class="info-label" style="color:#10b981">🎯 POINTS CLÉS</span>
+        <div id="preview-takeaways" class="takeaways-list"></div>
+      </div>
+
+      <!-- Actions -->
+      <div class="actions fade-up" style="animation-delay:.34s">
+        <button id="btn-download" class="btn-generate">📥 Télécharger le PDF</button>
+        <button id="btn-new-same" class="btn-secondary">⚡ Créer un autre PDF</button>
+        <button id="btn-reset2" class="btn-ghost-lg">🔄 Recommencer</button>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
