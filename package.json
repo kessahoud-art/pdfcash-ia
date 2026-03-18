@@ -1,0 +1,11 @@
+{
+  "name": "pdfcash-ia",
+  "version": "1.0.0",
+  "description": "PDF Cash IA - Generate sellable PDFs with AI",
+  "dependencies": {
+    "pdfkit": "^0.15.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
