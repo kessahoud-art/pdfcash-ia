@@ -778,30 +778,86 @@ function downloadSimple(){
   }).catch(function(e){ dl.fail(e.message); });
 }
 
+// ── GENERATE VISUALS LOCALLY (no API call) ──
+function generateVisuals(data){
+  var visuals = [];
+  (data.chapters||[]).forEach(function(ch, ci){
+    var content = ch.content || '';
+    var lines = content.split('\n').filter(function(l){return l.trim().length>3;});
+    
+    // Detect numbered steps
+    var steps = lines.filter(function(l){return /^\d+[\.\ )]/.test(l.trim())&&l.length<120;})
+      .slice(0,5).map(function(l){return l.replace(/^\d+[\.\ )\s]+/,'').trim();});
+    
+    if(steps.length >= 3){
+      visuals.push({chapter_index:ci, type:'steps', data:{title:'Les etapes cles', steps:steps}});
+      return;
+    }
+    
+    // Detect FCFA values for chart
+    var fcfaMatches = [];
+    lines.forEach(function(l){
+      var m = l.match(/(\d[\d\s]{2,}(?:000)?(?:\s*FCFA)?)/g);
+      if(m) m.forEach(function(v){
+        var n = parseInt(v.replace(/\D/g,''));
+        if(n>=1000&&n<=10000000){
+          var label = l.replace(m[0],'').replace(/[\d\s,\.]+FCFA/g,'').trim().slice(0,30);
+          if(label.length>3) fcfaMatches.push({label:label, value:n, unit:'FCFA'});
+        }
+      });
+    });
+    if(fcfaMatches.length>=2){
+      visuals.push({chapter_index:ci, type:'chart', data:{title:'Chiffres cles', values:fcfaMatches.slice(0,4)}});
+      return;
+    }
+    
+    // Find a strong sentence for quote
+    var strong = lines.filter(function(l){
+      return l.length>40&&l.length<160&&!l.includes('http')&&/[!]|important|cle|essentiel|secret|conseil/i.test(l);
+    });
+    if(strong.length>0){
+      visuals.push({chapter_index:ci, type:'quote', data:{text:strong[0].replace(/[*#]/g,'').trim()}});
+      return;
+    }
+    
+    // Default: highlight key points from chapter
+    var points = lines.filter(function(l){
+      return l.trim().length>15&&l.trim().length<100&&!l.match(/^[A-Z]{3,}/);
+    }).slice(0,4);
+    if(points.length>=2){
+      visuals.push({chapter_index:ci, type:'highlight', data:{
+        title:'Points importants',
+        points:points.map(function(p){return p.replace(/[*#:]/g,'').trim();})
+      }});
+    }
+  });
+  return visuals;
+}
+
 // ── DOWNLOAD PREMIUM ──
 async function downloadPremium(){
   if(!S.data)return;
-  var dl=dlOverlay('Création du PDF Premium...','Génération des visuels...');
+  var dl=dlOverlay('Creation du PDF Premium...','Ajout des visuels...');
 
   try{
-    // Step 1: get visual data
-    var vRes=await fetch('/api/generate',{
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({action:'visuals',content:S.data})
-    });
-    var visuals=await vRes.json().catch(function(){return{};});
+    // Generate visuals locally - no API call needed
+    var visuals = generateVisuals(S.data);
 
-    // Step 2: generate premium PDF
+    // Single API call to generate premium PDF
     var pRes=await fetch('/api/pdf-premium',{
       method:'POST', headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({content:S.data,visuals:visuals,docType:S.type,docLabel:S.label,color:S.color})
+      body:JSON.stringify({content:S.data, visuals:visuals, docType:S.type, docLabel:S.label, color:S.color})
     });
-    if(!pRes.ok)throw new Error('Erreur PDF Premium '+pRes.status);
+    if(!pRes.ok){
+      var errData=await pRes.json().catch(function(){return{error:'Erreur serveur'};});
+      throw new Error(errData.error||'Erreur PDF Premium '+pRes.status);
+    }
     var blob=await pRes.blob();
     dl.done();
     var url=URL.createObjectURL(blob);
     var a=document.createElement('a');
-    a.href=url; a.download=((S.data.title||'doc').replace(/[^a-zA-Z0-9 ]/g,'').replace(/ +/g,'_').slice(0,40))+'_premium.pdf';
+    a.href=url;
+    a.download=((S.data.title||'doc').replace(/[^a-zA-Z0-9 ]/g,'').replace(/ +/g,'_').slice(0,40))+'_premium.pdf';
     document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
   }catch(e){ dl.fail(e.message); }
 }
