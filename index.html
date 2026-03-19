@@ -34,16 +34,24 @@ header{position:sticky;top:0;z-index:99;background:rgba(6,6,16,.97);backdrop-fil
 .ai-badge{background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.35);border-radius:20px;padding:5px 10px;font-size:11px;color:#a78bfa;font-weight:700}
 #btn-back{background:transparent;border:1px solid var(--bo2);border-radius:8px;padding:7px 12px;color:var(--t3);font-size:12px;cursor:pointer;font-family:inherit}
 
-/* PROGRESS INDICATOR */
-.progress-steps{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:24px}
-.ps{display:flex;align-items:center;gap:0}
-.ps-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:12px;font-weight:900;border:2px solid var(--bo2);color:var(--t4);background:var(--b2);transition:all .3s;flex-shrink:0}
-.ps-dot.active{background:linear-gradient(135deg,var(--p),var(--pk));border-color:transparent;color:#fff;box-shadow:0 0 14px #7c3aed55}
-.ps-dot.done{background:var(--g);border-color:transparent;color:#fff}
-.ps-line{width:32px;height:2px;background:var(--bo2);transition:background .3s}
-.ps-line.done{background:var(--g)}
-.ps-label{font-size:9px;color:var(--t4);text-align:center;margin-top:4px;font-weight:700;letter-spacing:.5px}
-.ps-wrap{display:flex;flex-direction:column;align-items:center}
+/* FLOW SELECTOR */
+.flow-selector{display:flex;flex-direction:column;gap:10px;margin-bottom:22px}
+.flow-top{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.flow-btn{background:var(--b2);border:2px solid var(--bo);border-radius:14px;padding:16px 10px;cursor:pointer;text-align:center;font-family:inherit;touch-action:manipulation;transition:all .2s}
+.flow-btn:active{transform:scale(.97)}
+.flow-btn.active{border-color:var(--p);background:rgba(124,58,237,.12);box-shadow:0 0 16px rgba(124,58,237,.2)}
+.flow-btn-ico{font-size:22px;margin-bottom:6px}
+.flow-btn-name{font-family:'Sora',sans-serif;font-size:13px;font-weight:900;color:#fff;margin-bottom:3px}
+.flow-btn-sub{font-size:10px;color:var(--t4);line-height:1.4}
+.flow-badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:9px;font-weight:700;margin-top:5px}
+.badge-classic{background:rgba(16,185,129,.15);color:#10b981;border:1px solid rgba(16,185,129,.3)}
+.badge-new{background:rgba(236,72,153,.15);color:#ec4899;border:1px solid rgba(236,72,153,.3)}
+.badge-free{background:rgba(245,158,11,.15);color:#f59e0b;border:1px solid rgba(245,158,11,.3)}
+/* PROMPT LIBRE */
+.pl-examples{display:flex;flex-direction:column;gap:7px;margin-top:12px}
+.pl-ex{background:var(--b3);border:1px solid var(--bo2);border-radius:10px;padding:10px 13px;font-size:11px;color:var(--t3);cursor:pointer;touch-action:manipulation;line-height:1.55;transition:all .15s;text-align:left;font-family:inherit;width:100%}
+.pl-ex:active{background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.3);color:var(--t2)}
+.pl-ex b{color:#f59e0b}
 
 main{max-width:540px;margin:0 auto;padding:18px 14px 90px}
 
@@ -61,7 +69,7 @@ h1.big{font-family:'Sora',sans-serif;font-size:clamp(28px,8vw,44px);font-weight:
 .hero-sub{color:var(--t3);font-size:14px;line-height:1.65;margin-bottom:20px}
 .lbl{font-size:10px;color:var(--t4);font-weight:700;letter-spacing:2px;margin-bottom:10px}
 
-/* DOMAIN INPUT */
+/* INPUTS */
 textarea,input[type=text]{width:100%;background:var(--b2);border:2px solid var(--bo);border-radius:14px;color:#fff!important;font-size:15px;font-family:inherit;padding:14px 16px;resize:none;outline:none;line-height:1.65;margin-bottom:12px;-webkit-appearance:none;display:block;transition:border-color .2s}
 textarea:focus,input[type=text]:focus{border-color:var(--p)}
 textarea::placeholder,input::placeholder{color:var(--t4)}
@@ -92,7 +100,7 @@ textarea::placeholder,input::placeholder{color:var(--t4)}
 .tbtn{background:var(--b2);border:2px solid var(--bo);border-radius:12px;padding:12px 8px;cursor:pointer;text-align:center;display:flex;flex-direction:column;align-items:center;gap:3px;font-family:inherit;touch-action:manipulation;transition:all .2s;position:relative}
 .tbtn:active{transform:scale(.97)}
 .tbtn.sel{background:rgba(124,58,237,.12);border-color:var(--p)}
-.tbtn.sel::after{content:'✓';position:absolute;top:5px;right:7px;color:var(--p);font-weight:900;font-size:11px}
+.tbtn.sel::after{content:'';position:absolute;top:5px;right:7px;color:var(--p);font-weight:900;font-size:11px}
 .t-ico{font-size:20px}
 .t-name{font-size:11px;font-weight:700;color:#fff;font-family:'Sora',sans-serif}
 .t-price{font-size:9px;color:var(--g);font-weight:700}
@@ -119,6 +127,8 @@ textarea::placeholder,input::placeholder{color:var(--t4)}
 .btn-mid:active{background:var(--b3);transform:scale(.97)}
 .btn-green{width:100%;background:linear-gradient(135deg,#059669,#10b981);border:none;border-radius:16px;padding:17px 24px;color:#fff;font-size:15px;font-weight:800;cursor:pointer;font-family:'Sora',sans-serif;margin-top:10px;min-height:58px;touch-action:manipulation;box-shadow:0 4px 20px rgba(16,185,129,.35);transition:all .2s}
 .btn-green:active{transform:scale(.97)}
+.btn-orange{width:100%;background:linear-gradient(135deg,#d97706,#f59e0b);border:none;border-radius:16px;padding:17px 24px;color:#fff;font-size:15px;font-weight:800;cursor:pointer;font-family:'Sora',sans-serif;margin-top:10px;min-height:58px;touch-action:manipulation;box-shadow:0 4px 20px rgba(245,158,11,.35);transition:all .2s}
+.btn-orange:active{transform:scale(.97)}
 .btn-sm{width:100%;background:transparent;border:1px solid var(--bo);border-radius:16px;padding:15px 24px;color:var(--t4);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:10px;min-height:52px;touch-action:manipulation}
 
 /* GENERATING */
@@ -134,7 +144,7 @@ textarea::placeholder,input::placeholder{color:var(--t4)}
 .si.done{color:var(--g)}
 .si.cur{color:var(--t2);font-weight:600}
 
-/* PREVIEW CARDS */
+/* CARDS */
 .card{background:var(--b2);border:1px solid var(--bo);border-radius:16px;padding:18px 16px;margin-bottom:12px}
 .card-lbl{font-size:10px;color:var(--t4);font-weight:700;letter-spacing:2px;margin-bottom:12px;display:block}
 .ok-bar{background:rgba(5,46,22,.85);border:1px solid #166534;border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:14px;margin-bottom:14px}
@@ -172,7 +182,7 @@ textarea::placeholder,input::placeholder{color:var(--t4)}
 .wa-msg{color:var(--t2);font-size:13px;line-height:1.75;background:#060610;border-radius:10px;padding:12px 13px;border:1px solid var(--bo);border-left:3px solid #25d366;margin-bottom:10px}
 .wa-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .btn-copy{background:var(--b3);border:1px solid var(--bo2);border-radius:10px;padding:12px;color:var(--t3);font-size:12px;cursor:pointer;font-family:inherit;font-weight:600;min-height:46px;display:flex;align-items:center;justify-content:center;touch-action:manipulation;transition:all .2s}
-.btn-copy.ok{background:rgba(5,46,22,.8);border-color:#166534;color:#4ade80}
+.btn-copy.ok{background:rgba(5,46,22,.8);border-color:#166834;color:#4ade80}
 .btn-wa{background:rgba(37,211,102,.12);border:1px solid rgba(37,211,102,.3);border-radius:10px;padding:12px;color:#25d366;font-size:12px;font-weight:700;text-decoration:none;font-family:inherit;min-height:46px;display:flex;align-items:center;justify-content:center;touch-action:manipulation}
 
 /* FACEBOOK ADS */
@@ -183,8 +193,21 @@ textarea::placeholder,input::placeholder{color:var(--t4)}
 .ads-field-val{font-size:12px;color:var(--t2);line-height:1.65}
 .ads-field-val.title-val{font-family:'Sora',sans-serif;font-size:15px;font-weight:900;color:#fff}
 
-/* DOWNLOAD BUTTONS */
-/* dl styles removed */
+/* NOUVEAU FLOW — SYSTEME VENTE WHATSAPP */
+.wa-system{background:var(--b2);border:1px solid var(--bo);border-radius:16px;padding:18px 16px;margin-bottom:12px}
+.wa-system-title{font-size:11px;color:#25d366;font-weight:700;letter-spacing:2px;margin-bottom:14px}
+.wa-msg-item{margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--bo)}
+.wa-msg-item:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.wa-msg-label{font-size:9px;color:var(--t4);font-weight:700;letter-spacing:1px;margin-bottom:6px}
+.wa-msg-text{color:var(--t2);font-size:12px;line-height:1.7;background:#060610;border-radius:8px;padding:10px 12px;border:1px solid var(--bo);border-left:3px solid #25d366;margin-bottom:7px}
+.btn-copy-sm{background:var(--b3);border:1px solid var(--bo2);border-radius:8px;padding:8px 14px;color:var(--t3);font-size:11px;cursor:pointer;font-family:inherit;font-weight:600;touch-action:manipulation;transition:all .2s}
+.btn-copy-sm.ok{background:rgba(5,46,22,.8);border-color:#166834;color:#4ade80}
+.sale-page-card{background:linear-gradient(135deg,rgba(236,72,153,.1),rgba(245,158,11,.08));border:1px solid rgba(236,72,153,.3);border-radius:16px;padding:16px;margin-bottom:12px}
+.sale-page-lbl{font-size:10px;color:#ec4899;font-weight:700;letter-spacing:2px;margin-bottom:10px}
+.sale-page-field{background:#060610;border:1px solid var(--bo);border-radius:10px;padding:12px 13px;margin-bottom:8px}
+.sale-page-field-lbl{font-size:9px;color:var(--t4);font-weight:700;letter-spacing:1px;margin-bottom:5px}
+.sale-page-field-val{font-size:12px;color:var(--t2);line-height:1.65}
+
 .hook{color:#fbbf24;font-size:13px;font-style:italic;font-weight:700;line-height:1.55}
 .tw-list{display:flex;flex-direction:column;gap:8px}
 .tw{display:flex;gap:10px;align-items:flex-start;font-size:12px;color:var(--t2);line-height:1.6;background:#060610;border-radius:9px;padding:10px 12px;border:1px solid var(--bo)}
@@ -215,16 +238,55 @@ textarea::placeholder,input::placeholder{color:var(--t4)}
 
 <main>
 
-<!-- ══ STEP 1 : TROUVER L'IDÉE ══ -->
-<section id="s-ideas" class="step on">
+<!-- ══ STEP 0 : CHOIX DU FLOW ══ -->
+<section id="s-home" class="step on">
   <div class="ctr-box fu">
     <div class="ctr-left">
-      <span class="ctr-fire" style="font-size:22px">🔥</span>
+      <span style="font-size:22px">🔥</span>
       <div><div class="ctr-num" id="ctr-num">12 847</div><div class="ctr-lbl">PDFs générés</div></div>
     </div>
     <div class="ctr-live"><div class="live-dot"></div>EN DIRECT</div>
   </div>
 
+  <div style="text-align:center;margin-bottom:22px" class="fu">
+    <h1 class="big">Choisis ton<br/><span class="grad">mode de création 🚀</span></h1>
+    <p class="hero-sub">Deux flows puissants pour créer et vendre tes eBooks sur le marché africain.</p>
+  </div>
+
+  <div class="lbl fu">SÉLECTIONNE UN FLOW</div>
+  <div class="flow-selector fu" style="animation-delay:.1s">
+    <div class="flow-top">
+      <button class="flow-btn" id="flow-classic-btn" onclick="selectFlow('classic')">
+        <div class="flow-btn-ico">⚡</div>
+        <div class="flow-btn-name">Flow Classique</div>
+        <div class="flow-btn-sub">6 chapitres libres + Facebook Ads + Page de vente</div>
+        <span class="flow-badge badge-classic">EXISTANT</span>
+      </button>
+      <button class="flow-btn" id="flow-new-btn" onclick="selectFlow('new')">
+        <div class="flow-btn-ico">🆕</div>
+        <div class="flow-btn-name">Nouveau Flow</div>
+        <div class="flow-btn-sub">Structure pro 7 parties + Système WhatsApp complet</div>
+        <span class="flow-badge badge-new">NOUVEAU</span>
+      </button>
+    </div>
+    <button class="flow-btn" id="flow-free-btn" onclick="selectFlow('free')" style="display:flex;align-items:center;gap:14px;text-align:left;padding:14px 16px">
+      <div class="flow-btn-ico" style="font-size:26px;flex-shrink:0">✍️</div>
+      <div style="flex:1">
+        <div class="flow-btn-name">Prompt Libre</div>
+        <div class="flow-btn-sub">Tu décris exactement ce que tu veux — CV, ebook, guide, business plan, TikTok, formation — l'IA génère tout selon ton prompt</div>
+        <span class="flow-badge badge-free">LIBRE</span>
+      </div>
+    </button>
+  </div>
+
+  <div id="err-home" class="err hide"></div>
+  <button id="btn-start-flow" class="btn-big fu" style="animation-delay:.2s" disabled>
+    Continuer →
+  </button>
+</section>
+
+<!-- ══ STEP 1 : TROUVER L'IDÉE (commun aux 2 flows) ══ -->
+<section id="s-ideas" class="step">
   <div style="text-align:center;margin-bottom:20px" class="fu">
     <h1 class="big">Trouve ton idée<br/><span class="grad">qui va vendre 🔥</span></h1>
     <p class="hero-sub">Entre un domaine → l'IA génère 15 idées validées pour le marché africain.</p>
@@ -234,7 +296,7 @@ textarea::placeholder,input::placeholder{color:var(--t4)}
   <input type="text" id="domain-input" placeholder="Ex: business, séduction, santé, cuisine..." class="fu" style="animation-delay:.1s"/>
 
   <div class="fu" style="animation-delay:.13s">
-    <div class="lbl">💡 SUGGESTIONS RAPIDES</div>
+    <div class="lbl">SUGGESTIONS RAPIDES</div>
     <div class="sug-list">
       <button class="sb">💰 Argent & Business</button>
       <button class="sb">❤️ Relations</button>
@@ -262,45 +324,32 @@ textarea::placeholder,input::placeholder{color:var(--t4)}
     </div>
     <p style="font-size:12px;color:var(--t4)">Clique sur l'idée qui t'intéresse le plus</p>
   </div>
-
-  <!-- TOP VIRAL -->
   <div class="ideas-section fu" style="animation-delay:.05s">
     <div class="ideas-section-title" style="color:#ec4899">🔥 <span style="color:#fff">TOP POTENTIEL VIRAL</span></div>
     <div class="ideas-grid" id="ideas-viral"></div>
   </div>
-
-  <!-- CASH RAPIDE -->
   <div class="ideas-section fu" style="animation-delay:.1s">
     <div class="ideas-section-title" style="color:#10b981">💰 <span style="color:#fff">CASH RAPIDE</span></div>
     <div class="ideas-grid" id="ideas-cash"></div>
   </div>
-
-  <!-- OCÉAN BLEU -->
   <div class="ideas-section fu" style="animation-delay:.15s">
     <div class="ideas-section-title" style="color:#60a5fa">🌊 <span style="color:#fff">IDÉES PEU EXPLOITÉES</span></div>
     <div class="ideas-grid" id="ideas-ocean"></div>
   </div>
-
   <div id="err2" class="err hide"></div>
-  <button id="btn-use-idea" class="btn-big" disabled>
-    ✍️ Choisir cette idée
-  </button>
+  <button id="btn-use-idea" class="btn-big" disabled>✍️ Choisir cette idée</button>
 </section>
 
-<!-- ══ STEP 2 : CRÉER LE CONTENU ══ -->
+<!-- ══ STEP 2 CLASSIQUE : CRÉER LE CONTENU ══ -->
 <section id="s-create" class="step">
   <div class="fu" style="margin-bottom:18px">
     <div style="font-family:'Sora',sans-serif;font-size:18px;font-weight:900;color:#fff;margin-bottom:4px">Personnalise ton document</div>
     <p style="font-size:12px;color:var(--t4)">Plus tu précises, plus le contenu sera pertinent et vendable</p>
   </div>
-
-  <!-- Selected idea display -->
   <div id="selected-idea-box" class="fu" style="animation-delay:.05s;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.3);border-radius:14px;padding:14px;margin-bottom:18px">
     <div style="font-size:10px;color:#a78bfa;font-weight:700;letter-spacing:1px;margin-bottom:6px">💡 IDÉE SÉLECTIONNÉE</div>
     <div id="sel-idea-title" style="font-family:'Sora',sans-serif;font-size:14px;font-weight:900;color:#fff;line-height:1.3"></div>
   </div>
-
-  <!-- Type selector -->
   <div class="lbl fu" style="animation-delay:.08s">TYPE DE DOCUMENT</div>
   <div class="type-grid fu" style="animation-delay:.1s">
     <button class="tbtn sel" data-t="ebook" data-l="Ebook"><span class="t-ico">📘</span><span class="t-name">Ebook</span><span class="t-price">3k–10k FCFA</span></button>
@@ -310,24 +359,16 @@ textarea::placeholder,input::placeholder{color:var(--t4)}
     <button class="tbtn" data-t="tiktok" data-l="Scripts TikTok"><span class="t-ico">🎬</span><span class="t-name">TikTok</span><span class="t-price">1.5k–4k FCFA</span></button>
     <button class="tbtn" data-t="cv" data-l="CV Pro"><span class="t-ico">📄</span><span class="t-name">CV Pro</span><span class="t-price">2k–5k FCFA</span></button>
   </div>
-
-  <!-- Pour qui -->
   <div class="lbl fu" style="animation-delay:.13s">POUR QUI ? <span style="color:var(--t4);font-weight:400;font-size:9px">(optionnel mais recommandé)</span></div>
   <input type="text" id="target-input" placeholder="Ex: femmes au foyer au Benin, etudiants sans emploi..." class="fu" style="animation-delay:.15s"/>
-
-  <!-- Auteur -->
   <div class="lbl fu" style="animation-delay:.14s">NOM D'AUTEUR <span style="color:var(--t4);font-weight:400;font-size:9px">(optionnel)</span></div>
   <input type="text" id="author-input" placeholder="Ex: Jean Kouassi, Coach Aminata..." class="fu" style="animation-delay:.145s"/>
-
-  <!-- Niveau -->
   <div class="lbl fu" style="animation-delay:.17s">NIVEAU DU CONTENU</div>
   <div class="level-grid fu" style="animation-delay:.19s">
     <div class="lvl sel" data-l="debutant">🟢 Débutant</div>
     <div class="lvl" data-l="intermediaire">🟡 Intermédiaire</div>
     <div class="lvl" data-l="avance">🔴 Avancé</div>
   </div>
-
-  <!-- Couleur -->
   <div class="lbl fu" style="animation-delay:.21s">🎨 COULEUR DE COUVERTURE</div>
   <div class="cgrid fu" style="animation-delay:.23s">
     <button class="cbtn sel" data-c1="#1a0535" data-c2="#0d1030" data-ac="#7c3aed" style="background:linear-gradient(135deg,#1a0535,#0d1030)"><div class="cdot" style="background:linear-gradient(135deg,#7c3aed,#ec4899)"></div><div class="cname">Violet</div></button>
@@ -339,15 +380,83 @@ textarea::placeholder,input::placeholder{color:var(--t4)}
     <button class="cbtn" data-c1="#100a00" data-c2="#080400" data-ac="#fb923c" style="background:linear-gradient(135deg,#100a00,#080400)"><div class="cdot" style="background:linear-gradient(135deg,#c2410c,#fb923c)"></div><div class="cname">Feu</div></button>
     <button class="cbtn" data-c1="#0a0a10" data-c2="#050508" data-ac="#94a3b8" style="background:linear-gradient(135deg,#0a0a10,#050508)"><div class="cdot" style="background:linear-gradient(135deg,#334155,#94a3b8)"></div><div class="cname">Acier</div></button>
   </div>
-
   <div id="err3" class="err hide"></div>
-  <button id="btn-generate" class="btn-big fu" style="animation-delay:.26s">
-    ⚡ Générer mon document
-  </button>
+  <button id="btn-generate" class="btn-big fu" style="animation-delay:.26s">⚡ Générer mon document</button>
   <button id="btn-back-ideas" class="btn-sm">← Changer d'idée</button>
 </section>
 
-<!-- ══ GENERATING ══ -->
+<!-- ══ STEP 2 NOUVEAU FLOW : CRÉER L'EBOOK ══ -->
+<section id="s-create-new" class="step">
+  <div class="fu" style="margin-bottom:18px">
+    <div style="font-family:'Sora',sans-serif;font-size:18px;font-weight:900;color:#fff;margin-bottom:4px">Nouveau Flow ✨</div>
+    <p style="font-size:12px;color:var(--t4)">Structure pro 7 parties + système de vente WhatsApp complet</p>
+  </div>
+
+  <!-- Idée sélectionnée OU titre direct -->
+  <div id="selected-idea-box-new" class="fu" style="animation-delay:.05s;background:rgba(236,72,153,.1);border:1px solid rgba(236,72,153,.3);border-radius:14px;padding:14px;margin-bottom:10px">
+    <div style="font-size:10px;color:#ec4899;font-weight:700;letter-spacing:1px;margin-bottom:6px">IDEE SELECTIONNEE</div>
+    <div id="sel-idea-title-new" style="font-family:'Sora',sans-serif;font-size:14px;font-weight:900;color:#fff;line-height:1.3"></div>
+  </div>
+
+  <!-- Séparateur OU -->
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px" class="fu" style="animation-delay:.07s">
+    <div style="flex:1;height:1px;background:var(--bo)"></div>
+    <div style="font-size:11px;color:var(--t4);font-weight:700">OU ENTRE TON PROPRE TITRE</div>
+    <div style="flex:1;height:1px;background:var(--bo)"></div>
+  </div>
+
+  <!-- Titre direct -->
+  <input type="text" id="direct-title-new" placeholder="Ex: Gagnez 300 000 FCFA en 30 jours avec la vente en ligne..." class="fu" style="animation-delay:.09s"/>
+
+  <div class="lbl fu" style="animation-delay:.11s">POUR QUI ? <span style="color:var(--t4);font-weight:400;font-size:9px">(optionnel)</span></div>
+  <input type="text" id="target-input-new" placeholder="Ex: jeunes entrepreneurs au Togo, mamans au Sénégal..." class="fu" style="animation-delay:.13s"/>
+
+  <div class="lbl fu" style="animation-delay:.15s">NOM D'AUTEUR <span style="color:var(--t4);font-weight:400;font-size:9px">(optionnel)</span></div>
+  <input type="text" id="author-input-new" placeholder="Ex: Kofi Expert, Coach Fatou..." class="fu" style="animation-delay:.17s"/>
+
+  <div id="err3-new" class="err hide"></div>
+  <button id="btn-generate-new" class="btn-big fu" style="animation-delay:.2s">🚀 Générer l'eBook complet</button>
+  <button id="btn-back-ideas-new" class="btn-sm">← Changer d'idée</button>
+</section>
+
+<!-- ══ STEP PROMPT LIBRE : CRÉER ══ -->
+<section id="s-create-free" class="step">
+  <div class="fu" style="margin-bottom:18px">
+    <div style="font-family:'Sora',sans-serif;font-size:18px;font-weight:900;color:#fff;margin-bottom:4px">Prompt Libre ✍️</div>
+    <p style="font-size:12px;color:var(--t4)">Décris exactement ce que tu veux — l'IA génère tout selon ton prompt</p>
+  </div>
+
+  <!-- Textarea prompt libre -->
+  <div class="lbl fu" style="animation-delay:.05s;color:#f59e0b">TON PROMPT</div>
+  <textarea id="free-prompt-input" rows="5" placeholder="Ex: Crée un CV pour un comptable de 5 ans d'expérience au Bénin sur 2 pages&#10;Ex: Guide pour vendre des pagnes sur WhatsApp à Abidjan avec 10 étapes&#10;Ex: Business plan pour une école de couture à Dakar avec projection 12 mois" class="fu" style="animation-delay:.08s"></textarea>
+
+  <!-- Exemples cliquables -->
+  <div class="lbl fu" style="animation-delay:.1s">EXEMPLES RAPIDES</div>
+  <div class="pl-examples fu" style="animation-delay:.12s">
+    <button class="pl-ex" data-prompt="Crée un CV professionnel pour un comptable avec 5 ans d'expérience au Bénin sur 2 pages maximum"><b>CV</b> — Comptable 5 ans expérience au Bénin, 2 pages</button>
+    <button class="pl-ex" data-prompt="Guide pratique pour vendre des pagnes sur WhatsApp à Abidjan avec 10 étapes détaillées et exemples de messages"><b>Guide</b> — Vendre des pagnes sur WhatsApp à Abidjan, 10 étapes</button>
+    <button class="pl-ex" data-prompt="Business plan complet pour ouvrir une école de couture à Dakar avec projection financière sur 12 mois et budget de démarrage en FCFA"><b>Business Plan</b> — École de couture à Dakar, projection 12 mois</button>
+    <button class="pl-ex" data-prompt="Pack de 6 scripts TikTok viraux pour promouvoir des produits de beauté africains avec accroches puissantes et hashtags"><b>TikTok</b> — 6 scripts viraux produits beauté africains</button>
+    <button class="pl-ex" data-prompt="Formation en ligne sur comment gagner 200 000 FCFA par mois avec le dropshipping en Afrique francophone en 5 leçons pratiques"><b>Formation</b> — Dropshipping Afrique, 200 000 FCFA/mois, 5 leçons</button>
+  </div>
+
+  <!-- Type de document -->
+  <div class="lbl fu" style="animation-delay:.16s;margin-top:14px">TYPE DE DOCUMENT</div>
+  <div class="type-grid fu" style="animation-delay:.18s">
+    <button class="tbtn-free sel" data-t="ebook" data-l="Ebook"><span class="t-ico">📘</span><span class="t-name">Ebook</span></button>
+    <button class="tbtn-free" data-t="guide" data-l="Guide Pratique"><span class="t-ico">🎯</span><span class="t-name">Guide</span></button>
+    <button class="tbtn-free" data-t="business_plan" data-l="Business Plan"><span class="t-ico">💼</span><span class="t-name">Business Plan</span></button>
+    <button class="tbtn-free" data-t="formation" data-l="Mini-Formation"><span class="t-ico">🎓</span><span class="t-name">Formation</span></button>
+    <button class="tbtn-free" data-t="tiktok" data-l="Scripts TikTok"><span class="t-ico">🎬</span><span class="t-name">TikTok</span></button>
+    <button class="tbtn-free" data-t="cv" data-l="CV Pro"><span class="t-ico">📄</span><span class="t-name">CV Pro</span></button>
+  </div>
+
+  <div id="err-free" class="err hide"></div>
+  <button id="btn-generate-free" class="btn-big fu" style="animation-delay:.22s;background:linear-gradient(135deg,#b45309,#f59e0b);box-shadow:0 4px 28px rgba(245,158,11,.4)" disabled>
+    ✍️ Générer selon mon prompt
+  </button>
+  <button id="btn-back-home-free" class="btn-sm">← Retour accueil</button>
+</section>
 <section id="s-gen" class="step">
   <div class="gen-wrap fu">
     <div class="robot">🤖</div>
@@ -359,21 +468,15 @@ textarea::placeholder,input::placeholder{color:var(--t4)}
       <div class="si">⏸️ Analyse du sujet et de la cible</div>
       <div class="si">⏸️ Rédaction des chapitres</div>
       <div class="si">⏸️ Exemples et cas concrets</div>
-      <div class="si">⏸️ Script Facebook Ads</div>
-      <div class="si">⏸️ Message de vente WhatsApp</div>
+      <div class="si">⏸️ Script de vente</div>
+      <div class="si">⏸️ Finalisation du contenu</div>
     </div>
   </div>
 </section>
 
-<!-- ══ STEP 3 : RÉSULTAT ══ -->
+<!-- ══ STEP 3 CLASSIQUE : RÉSULTAT ══ -->
 <section id="s-result" class="step">
-
-  <div class="ok-bar fu">
-    <span class="ok-ico">🎉</span>
-    <div><div class="ok-t">Document généré !</div><div class="ok-s">Prêt à télécharger et vendre</div></div>
-  </div>
-
-  <!-- Cover preview -->
+  <div class="ok-bar fu"><span class="ok-ico">🎉</span><div><div class="ok-t">Document généré !</div><div class="ok-s">Prêt à télécharger et vendre</div></div></div>
   <div class="cover fu" id="p-cover" style="animation-delay:.06s">
     <div class="cover-bar" id="p-cbar"></div>
     <div class="cover-in">
@@ -384,21 +487,15 @@ textarea::placeholder,input::placeholder{color:var(--t4)}
       <div class="c-price" id="p-price"></div>
     </div>
   </div>
-
-  <!-- TOC -->
   <div class="card fu" style="animation-delay:.09s">
     <span class="card-lbl">📋 TABLE DES MATIÈRES</span>
     <div class="toc-list" id="p-toc"></div>
   </div>
-
-  <!-- Chapter preview -->
   <div class="card fu" style="animation-delay:.12s">
     <span class="card-lbl">👁️ APERÇU CHAPITRE 1</span>
     <div class="ch-t" id="p-cht"></div>
     <p class="ch-p" id="p-chp"></p>
   </div>
-
-  <!-- Revenue -->
   <div class="rev-card fu" style="animation-delay:.15s">
     <div class="rev-lbl">💸 TON POTENTIEL DE REVENUS</div>
     <div class="rev-grid">
@@ -407,26 +504,13 @@ textarea::placeholder,input::placeholder{color:var(--t4)}
       <div class="rbox"><div class="rq">100 ventes</div><div class="ra" id="r100"></div></div>
     </div>
   </div>
-
-  <!-- Facebook Ads -->
   <div class="ads-card fu" style="animation-delay:.17s">
     <span class="ads-label">🎯 SCRIPT FACEBOOK ADS GÉNÉRÉ</span>
-    <div class="ads-field">
-      <div class="ads-field-lbl">TITRE DE LA PUB</div>
-      <div class="ads-field-val title-val" id="ads-title"></div>
-    </div>
-    <div class="ads-field">
-      <div class="ads-field-lbl">TEXTE PRINCIPAL</div>
-      <div class="ads-field-val" id="ads-text"></div>
-    </div>
-    <div class="ads-field">
-      <div class="ads-field-lbl">CIBLAGE SUGGÉRÉ</div>
-      <div class="ads-field-val" id="ads-targeting"></div>
-    </div>
+    <div class="ads-field"><div class="ads-field-lbl">TITRE DE LA PUB</div><div class="ads-field-val title-val" id="ads-title"></div></div>
+    <div class="ads-field"><div class="ads-field-lbl">TEXTE PRINCIPAL</div><div class="ads-field-val" id="ads-text"></div></div>
+    <div class="ads-field"><div class="ads-field-lbl">CIBLAGE SUGGÉRÉ</div><div class="ads-field-val" id="ads-targeting"></div></div>
     <button class="btn-copy" id="btn-copy-ads" style="margin-top:8px;width:100%">📋 Copier le script complet</button>
   </div>
-
-  <!-- Payment -->
   <div class="pay-box fu" style="animation-delay:.19s">
     <div class="pay-title">💳 Encaisser le paiement</div>
     <div class="pay-sub">Client clique → WhatsApp s'ouvre avec TON numéro + message déjà écrit.</div>
@@ -440,8 +524,6 @@ textarea::placeholder,input::placeholder{color:var(--t4)}
     </div>
     <div class="pay-info">📲 Client paie → envoie capture → tu envoies le PDF</div>
   </div>
-
-  <!-- WhatsApp -->
   <div class="card fu" style="animation-delay:.21s">
     <span class="card-lbl" style="color:#25d366">📲 MESSAGE WHATSAPP DE VENTE</span>
     <p class="wa-msg" id="p-wa"></p>
@@ -450,30 +532,88 @@ textarea::placeholder,input::placeholder{color:var(--t4)}
       <a class="btn-wa" id="btn-wa" href="#" target="_blank">💬 WhatsApp</a>
     </div>
   </div>
-
-  <!-- TikTok -->
   <div class="card fu" style="animation-delay:.23s">
     <span class="card-lbl" style="color:#f59e0b">🎬 ACCROCHE TIKTOK</span>
     <p class="hook" id="p-tiktok"></p>
   </div>
-
-  <!-- Key takeaways -->
   <div class="card fu" style="animation-delay:.25s">
     <span class="card-lbl" style="color:#10b981">🎯 POINTS CLÉS</span>
     <div class="tw-list" id="p-tw"></div>
   </div>
-
-  <!-- DOWNLOAD BUTTONS -->
   <div class="fu" style="animation-delay:.28s">
-    <button class="btn-big" id="btn-dl-simple">Telecharger le PDF</button>
-    <button class="btn-green" id="btn-sales-page">Creer la Page de Vente</button>
-    <button class="btn-mid" id="btn-new">Creer un autre PDF</button>
-    <button class="btn-sm" id="btn-rst">Recommencer</button>
+    <button class="btn-big" id="btn-dl-simple">📥 Télécharger le PDF</button>
+    <button class="btn-green" id="btn-sales-page">📱 Créer la Page de Vente</button>
+    <button class="btn-mid" id="btn-new">Créer un autre PDF</button>
+    <button class="btn-sm" id="btn-rst">🔄 Recommencer</button>
   </div>
-
 </section>
 
-<!-- ══ SALES PAGE PREVIEW ══ -->
+<!-- ══ STEP 3 NOUVEAU FLOW : RÉSULTAT ══ -->
+<section id="s-result-new" class="step">
+  <div class="ok-bar fu"><span class="ok-ico">🎉</span><div><div class="ok-t">eBook généré !</div><div class="ok-s">Structure pro 7 parties prête</div></div></div>
+
+  <!-- Aperçu couverture -->
+  <div class="card fu" style="animation-delay:.06s">
+    <span class="card-lbl">📘 EBOOK GÉNÉRÉ</span>
+    <div style="font-family:'Sora',sans-serif;font-size:16px;font-weight:900;color:#fff;margin-bottom:6px" id="nf-title"></div>
+    <div style="font-size:12px;color:var(--t3);margin-bottom:10px;line-height:1.6" id="nf-subtitle"></div>
+    <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.4);border-radius:8px;padding:7px 12px;font-size:12px;font-weight:800;color:#4ade80" id="nf-price"></div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="card fu" style="animation-delay:.09s">
+    <span class="card-lbl">📋 STRUCTURE 7 PARTIES</span>
+    <div class="toc-list" id="nf-toc"></div>
+  </div>
+
+  <!-- Aperçu contenu -->
+  <div class="card fu" style="animation-delay:.12s">
+    <span class="card-lbl">👁️ APERÇU INTRODUCTION</span>
+    <div class="ch-t" id="nf-cht"></div>
+    <p class="ch-p" id="nf-chp"></p>
+  </div>
+
+  <!-- Potentiel revenus -->
+  <div class="rev-card fu" style="animation-delay:.14s">
+    <div class="rev-lbl">💸 POTENTIEL DE REVENUS</div>
+    <div class="rev-grid">
+      <div class="rbox"><div class="rq">10 ventes</div><div class="ra" id="nf-r10"></div></div>
+      <div class="rbox"><div class="rq">50 ventes</div><div class="ra" id="nf-r50"></div></div>
+      <div class="rbox"><div class="rq">100 ventes</div><div class="ra" id="nf-r100"></div></div>
+    </div>
+  </div>
+
+  <!-- Système vente WhatsApp -->
+  <div class="wa-system fu" style="animation-delay:.16s">
+    <div class="wa-system-title">📲 SYSTÈME DE VENTE WHATSAPP</div>
+    <div id="nf-wa-messages"></div>
+    <button class="btn-copy" id="btn-copy-wa-all" style="width:100%;margin-top:10px">📋 Copier tous les messages</button>
+    <button class="btn-orange" id="btn-dl-wa-txt" style="margin-top:8px">📄 Télécharger en TXT</button>
+  </div>
+
+  <!-- Page de vente -->
+  <div class="sale-page-card fu" style="animation-delay:.18s">
+    <div class="sale-page-lbl">🛒 PAGE DE VENTE</div>
+    <div class="sale-page-field"><div class="sale-page-field-lbl">TITRE ACCROCHEUR</div><div class="sale-page-field-val" id="nf-sale-title"></div></div>
+    <div class="sale-page-field"><div class="sale-page-field-lbl">AGITATION ÉMOTIONNELLE</div><div class="sale-page-field-val" id="nf-sale-problem"></div></div>
+    <div class="sale-page-field"><div class="sale-page-field-lbl">APPEL À L'ACTION</div><div class="sale-page-field-val" id="nf-sale-cta"></div></div>
+    <button class="btn-copy" id="btn-copy-sale" style="margin-top:8px;width:100%">📋 Copier la page de vente</button>
+  </div>
+
+  <!-- Points clés -->
+  <div class="card fu" style="animation-delay:.2s">
+    <span class="card-lbl" style="color:#10b981">🎯 POINTS CLÉS</span>
+    <div class="tw-list" id="nf-tw"></div>
+  </div>
+
+  <div class="fu" style="animation-delay:.22s">
+    <button class="btn-big" id="btn-dl-new">📥 Télécharger le PDF (7-10 pages)</button>
+    <button class="btn-mid" id="btn-new-nf">Créer un autre eBook</button>
+    <button class="btn-sm" id="btn-rst-nf">🔄 Recommencer</button>
+  </div>
+</section>
+
+<!-- ══ SALES PAGE PREVIEW (flow classique) ══ -->
 <section id="s-sale" class="step">
   <div class="ok-bar fu"><span class="ok-ico">📱</span><div><div class="ok-t">Page de vente créée !</div><div class="ok-s">Télécharge et partage</div></div></div>
   <div class="cover fu" id="sp-cover" style="animation-delay:.06s">
@@ -513,25 +653,53 @@ textarea::placeholder,input::placeholder{color:var(--t4)}
 <script>
 // ── STATE ──
 var S = {
+  flow: null, // 'classic' | 'new' | 'free'
   type:'ebook', label:'Ebook', topic:'', data:null, timer:null,
   color:{ c1:'#1a0535', c2:'#0d1030', ac:'#7c3aed' },
   level:'debutant', target:'',
-  ideas:null, selectedIdea:null
+  ideas:null, selectedIdea:null,
+  waSystem: null,
+  freeType:'ebook', freeLabel:'Ebook' // type pour prompt libre
 };
-var STEPS = ['Analyse du sujet et de la cible','Rédaction des chapitres','Exemples et cas concrets','Script Facebook Ads','Message de vente WhatsApp'];
+var STEPS = ['Analyse du sujet et de la cible','Rédaction des chapitres','Exemples et cas concrets','Script de vente','Finalisation du contenu'];
 var MON_WA = '22996830775';
 var BASE = 12847;
+var ALL_STEPS = ['s-home','s-ideas','s-ideas-result','s-create','s-create-new','s-create-free','s-gen','s-result','s-result-new','s-sale'];
 
 function g(id){ return document.getElementById(id); }
 
 // ── SHOW STEP ──
 function show(id){
-  ['s-ideas','s-ideas-result','s-create','s-gen','s-result','s-sale'].forEach(function(x){
-    var el=g(x); el.classList.remove('on'); el.style.display='none';
+  ALL_STEPS.forEach(function(x){
+    var el=g(x);
+    if(el){ el.classList.remove('on'); el.style.display='none'; }
   });
-  var el=g(id); el.classList.add('on'); el.style.display='block';
-  g('btn-back').classList.toggle('hide', id==='s-ideas');
+  var el=g(id);
+  if(el){ el.classList.add('on'); el.style.display='block'; }
+  g('btn-back').classList.toggle('hide', id==='s-home');
   window.scrollTo(0,0);
+}
+
+// ── FLOW SELECTOR ──
+function selectFlow(flow){
+  S.flow = flow;
+  g('flow-classic-btn').classList.toggle('active', flow==='classic');
+  g('flow-new-btn').classList.toggle('active', flow==='new');
+  g('flow-free-btn').classList.toggle('active', flow==='free');
+  g('btn-start-flow').disabled = false;
+  var labels = {
+    classic: '⚡ Démarrer Flow Classique →',
+    new:     '🆕 Démarrer Nouveau Flow →',
+    free:    '✍️ Démarrer Prompt Libre →'
+  };
+  g('btn-start-flow').textContent = labels[flow] || 'Continuer →';
+  if(flow==='free'){
+    g('btn-start-flow').style.background='linear-gradient(135deg,#b45309,#f59e0b)';
+    g('btn-start-flow').style.boxShadow='0 4px 28px rgba(245,158,11,.4)';
+  } else {
+    g('btn-start-flow').style.background='';
+    g('btn-start-flow').style.boxShadow='';
+  }
 }
 
 // ── COUNTER ──
@@ -547,9 +715,7 @@ function animNum(target){
 function bumpCounter(){
   var n=parseInt(localStorage.getItem('pdfcash_count')||'0');
   if(n<BASE)n=BASE;
-  n++;
-  localStorage.setItem('pdfcash_count',n);
-  animNum(n);
+  n++; localStorage.setItem('pdfcash_count',n); animNum(n);
 }
 
 // ── PROGRESS BAR ──
@@ -574,10 +740,9 @@ function startBar(msg){
   },400);
 }
 function stopBar(){ clearInterval(S.timer); g('pbar').style.width='100%'; g('pct').textContent='100%'; setSteps(5); }
-
 function showErr(id, m){ var el=g(id); el.textContent='⚠️ '+m; el.classList.remove('hide'); setTimeout(function(){el.classList.add('hide');},6000); }
-function rev(p,q){ var n=parseInt((p||'3000').replace(/\D/g,''))||3000; return (n*q).toLocaleString('fr-FR')+' FCFA'; }
-function mup(p,x){ var n=parseInt((p||'3000').replace(/\D/g,''))||3000; return (n*x).toLocaleString('fr-FR')+' FCFA'; }
+function rev(p,q){ var n=parseInt((p||'5000').replace(/\D/g,''))||5000; return (n*q).toLocaleString('fr-FR')+' FCFA'; }
+function mup(p,x){ var n=parseInt((p||'5000').replace(/\D/g,''))||5000; return (n*x).toLocaleString('fr-FR')+' FCFA'; }
 
 // ── STEP 1: FIND IDEAS ──
 async function findIdeas(){
@@ -585,9 +750,8 @@ async function findIdeas(){
   if(!domain)return;
   g('err1').classList.add('hide');
   show('s-gen');
-  startBar('L\'IA analyse le marché...');
+  startBar("L'IA analyse le marché...");
   g('gen-topic').textContent='Domaine : '+domain;
-
   try{
     var res=await fetch('/api/generate',{
       method:'POST', headers:{'Content-Type':'application/json'},
@@ -643,43 +807,44 @@ function renderIdeaList(containerId, ideas){
 function useIdea(){
   if(!S.selectedIdea)return;
   var idea=S.selectedIdea;
-  g('sel-idea-title').textContent=idea.titre;
   S.topic=idea.titre;
-  // Pre-select recommended type
-  var typeMap={'ebook':'ebook','guide':'guide','business_plan':'business_plan','formation':'formation','tiktok':'tiktok','cv':'cv'};
-  var rec=typeMap[idea.type_recommande]||'ebook';
-  document.querySelectorAll('.tbtn').forEach(function(b){
-    b.classList.toggle('sel', b.dataset.t===rec);
-    if(b.dataset.t===rec){ S.type=rec; S.label=b.dataset.l; }
-  });
-  show('s-create');
+
+  if(S.flow==='new'){
+    // Nouveau flow — affiche l'idée et vide le titre direct
+    g('sel-idea-title-new').textContent=idea.titre;
+    g('direct-title-new').value='';
+    show('s-create-new');
+  } else {
+    // Flow classique
+    g('sel-idea-title').textContent=idea.titre;
+    var typeMap={'ebook':'ebook','guide':'guide','business_plan':'business_plan','formation':'formation','tiktok':'tiktok','cv':'cv'};
+    var rec=typeMap[idea.type_recommande]||'ebook';
+    document.querySelectorAll('.tbtn').forEach(function(b){
+      b.classList.toggle('sel', b.dataset.t===rec);
+      if(b.dataset.t===rec){ S.type=rec; S.label=b.dataset.l; }
+    });
+    show('s-create');
+  }
 }
 
-// ── STEP 2: GENERATE CONTENT ──
+// ── STEP 2 CLASSIQUE: GENERATE CONTENT ──
 async function generateContent(){
   g('err3').classList.add('hide');
   show('s-gen');
-  startBar('L\'IA rédige ton document...');
+  startBar("L'IA rédige ton document...");
   g('gen-topic').textContent='« '+(S.topic.length>55?S.topic.slice(0,55)+'...':S.topic)+' »';
-
   try{
     var res=await fetch('/api/generate',{
       method:'POST', headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
-        action:'content',
-        topic:S.topic,
-        docType:S.type,
-        docLabel:S.label,
+        action:'content', topic:S.topic,
+        docType:S.type, docLabel:S.label,
         target:g('target-input').value.trim(),
         level:S.level
       })
     });
     var d=await res.json().catch(function(){return{error:'Réponse invalide'};});
-    if(!res.ok){
-      var msg=d.error||'Erreur ('+res.status+')';
-      if(res.status===404)msg='Fonction API introuvable. Vérifie api/generate.js sur GitHub.';
-      throw new Error(msg);
-    }
+    if(!res.ok) throw new Error(d.error||'Erreur ('+res.status+')');
     if(!d.title)throw new Error('Contenu incomplet. Réessaie !');
     S.data=d;
     stopBar();
@@ -690,7 +855,48 @@ async function generateContent(){
   }
 }
 
-// ── RENDER RESULT ──
+// ── STEP 2 NOUVEAU FLOW: GENERATE CONTENT ──
+async function generateContentNew(){
+  g('err3-new').classList.add('hide');
+
+  // Titre direct saisi OU idée sélectionnée
+  var directTitle = g('direct-title-new').value.trim();
+  var topic = directTitle || S.topic;
+
+  if(!topic){
+    showErr('err3-new', 'Entre un titre ou sélectionne une idée d\'abord.');
+    return;
+  }
+
+  // Si titre direct → on met à jour S.topic
+  if(directTitle) S.topic = directTitle;
+
+  show('s-gen');
+  startBar("L'IA rédige ton eBook...");
+  g('gen-topic').textContent='« '+(topic.length>55?topic.slice(0,55)+'...':topic)+' »';
+  try{
+    var res=await fetch('/api/generate',{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        action:'content', topic:topic,
+        docType:'ebook', docLabel:'Ebook',
+        target:g('target-input-new').value.trim(),
+        level:'debutant'
+      })
+    });
+    var d=await res.json().catch(function(){return{error:'Réponse invalide'};});
+    if(!res.ok) throw new Error(d.error||'Erreur ('+res.status+')');
+    if(!d.title)throw new Error('Contenu incomplet. Réessaie !');
+    S.data=d;
+    stopBar();
+    bumpCounter();
+    setTimeout(function(){ renderResultNew(d); show('s-result-new'); },600);
+  }catch(e){
+    stopBar(); show('s-create-new'); showErr('err3-new',e.message||'Erreur inconnue');
+  }
+}
+
+// ── RENDER RESULT CLASSIQUE ──
 function renderResult(d){
   var c=S.color;
   g('p-cover').style.background='linear-gradient(145deg,'+c.c1+','+c.c2+')';
@@ -699,36 +905,126 @@ function renderResult(d){
   g('p-badge').textContent='✦ '+S.label.toUpperCase()+' ✦';
   g('p-title').textContent=d.title||'';
   g('p-sub').textContent=d.subtitle||'';
-  g('p-tag').textContent='\u201c'+(d.tagline||'')+'\u201d';
+  g('p-tag').textContent='"'+(d.tagline||'')+'"';
   g('p-price').textContent='💰 Prix : '+(d.price_suggested||'');
-
   var toc=g('p-toc'); toc.innerHTML='';
+  (d.table_of_contents||[]).slice(0,7).forEach(function(it,i){
+    toc.innerHTML+='<div class="toc-row"><span class="toc-n">'+(i+1)+'.</span><span>'+it+'</span></div>';
+  });
+  var ch=(d.chapters||[])[0];
+  if(ch){ g('p-cht').textContent=ch.title||''; g('p-chp').textContent=(ch.content||'').slice(0,300)+'... [contenu complet dans le PDF]'; }
+  g('r10').textContent=rev(d.price_suggested,10);
+  g('r50').textContent=rev(d.price_suggested,50);
+  g('r100').textContent=rev(d.price_suggested,100);
+  var ads=d.facebook_ads||{};
+  g('ads-title').textContent=ads.titre_pub||'';
+  g('ads-text').textContent=ads.texte_principal||'';
+  g('ads-targeting').textContent=ads.ciblage_suggere||'';
+  var msg=d.sales_message||'';
+  g('p-wa').textContent=msg;
+  g('btn-wa').href='https://wa.me/?text='+encodeURIComponent(msg);
+  g('p-tiktok').textContent='"'+(d.viral_hook||'')+'"';
+  var tw=g('p-tw'); tw.innerHTML='';
+  (d.key_takeaways||[]).forEach(function(t){
+    tw.innerHTML+='<div class="tw"><span class="tw-ck">✓</span><span>'+t+'</span></div>';
+  });
+}
+
+// ── RENDER RESULT NOUVEAU FLOW ──
+function renderResultNew(d){
+  g('nf-title').textContent=d.title||'';
+  g('nf-subtitle').textContent=d.subtitle||'';
+  g('nf-price').textContent='💰 '+( d.price_suggested||'');
+
+  var toc=g('nf-toc'); toc.innerHTML='';
   (d.table_of_contents||[]).slice(0,7).forEach(function(it,i){
     toc.innerHTML+='<div class="toc-row"><span class="toc-n">'+(i+1)+'.</span><span>'+it+'</span></div>';
   });
 
   var ch=(d.chapters||[])[0];
-  if(ch){ g('p-cht').textContent=ch.title||''; g('p-chp').textContent=(ch.content||'').slice(0,300)+'... [contenu complet dans le PDF]'; }
+  if(ch){
+    g('nf-cht').textContent=ch.title||'';
+    g('nf-chp').textContent=(ch.content||'').slice(0,350)+'... [contenu complet dans le PDF]';
+  }
 
-  g('r10').textContent=rev(d.price_suggested,10);
-  g('r50').textContent=rev(d.price_suggested,50);
-  g('r100').textContent=rev(d.price_suggested,100);
+  g('nf-r10').textContent=rev(d.price_suggested,10);
+  g('nf-r50').textContent=rev(d.price_suggested,50);
+  g('nf-r100').textContent=rev(d.price_suggested,100);
 
-  // Facebook Ads
-  var ads=d.facebook_ads||{};
-  g('ads-title').textContent=ads.titre_pub||'';
-  g('ads-text').textContent=ads.texte_principal||'';
-  g('ads-targeting').textContent=ads.ciblage_suggere||'';
+  // Système vente WhatsApp
+  var waLabels = [
+    'MESSAGE 1 — ACCROCHE',
+    'MESSAGE 2 — PRÉSENTATION',
+    'MESSAGE 3 — PREUVE',
+    'MESSAGE 4 — OFFRE',
+    'MESSAGE 5 — URGENCE',
+    'MESSAGE RELANCE'
+  ];
 
-  var msg=d.sales_message||'';
-  g('p-wa').textContent=msg;
-  g('btn-wa').href='https://wa.me/?text='+encodeURIComponent(msg);
-  g('p-tiktok').textContent='\u201c'+(d.viral_hook||'')+'\u201d';
+  // On génère les messages depuis les données disponibles
+  var messages = buildWaMessages(d);
+  S.waSystem = messages;
 
-  var tw=g('p-tw'); tw.innerHTML='';
+  var waContainer=g('nf-wa-messages'); waContainer.innerHTML='';
+  messages.forEach(function(msg, i){
+    var label = waLabels[i] || ('MESSAGE '+(i+1));
+    var div=document.createElement('div');
+    div.className='wa-msg-item';
+    div.innerHTML='<div class="wa-msg-label">'+label+'</div>'
+      +'<div class="wa-msg-text" id="wa-msg-'+i+'">'+msg+'</div>'
+      +'<button class="btn-copy-sm" data-idx="'+i+'">📋 Copier</button>';
+    waContainer.appendChild(div);
+  });
+
+  // Boutons copier individuels
+  waContainer.querySelectorAll('.btn-copy-sm').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var idx=parseInt(btn.dataset.idx);
+      navigator.clipboard&&navigator.clipboard.writeText(messages[idx]).catch(function(){});
+      btn.textContent='✅ Copié !'; btn.classList.add('ok');
+      setTimeout(function(){btn.textContent='📋 Copier';btn.classList.remove('ok');},2000);
+    });
+  });
+
+  // Page de vente
+  var fa=d.facebook_ads||{};
+  g('nf-sale-title').textContent=d.title||'';
+  g('nf-sale-problem').textContent=d.description||d.subtitle||'';
+  g('nf-sale-cta').textContent=d.call_to_action||'Commande maintenant !';
+
+  // Points clés
+  var tw=g('nf-tw'); tw.innerHTML='';
   (d.key_takeaways||[]).forEach(function(t){
     tw.innerHTML+='<div class="tw"><span class="tw-ck">✓</span><span>'+t+'</span></div>';
   });
+}
+
+// ── BUILD WA MESSAGES ──
+function buildWaMessages(d){
+  var title=d.title||'';
+  var price=d.price_suggested||'5 000 FCFA';
+  var desc=d.description||d.subtitle||'';
+  var toc=(d.table_of_contents||[]).slice(0,3).map(function(t){return'✅ '+t;}).join('\n');
+
+  return [
+    // Message 1 — Accroche
+    'Tu veux vraiment changer ta situation ?\n\nBeaucoup de gens essaient... mais échouent parce qu\'ils n\'ont pas les bonnes informations.\n\nJ\'ai quelque chose qui peut tout changer pour toi. 👇',
+
+    // Message 2 — Présentation
+    'Je te présente :\n\n📘 *'+title+'*\n\n'+desc+'\n\nAu programme :\n'+toc+'\n\nC\'est concret, pratique et adapté à notre réalité africaine.',
+
+    // Message 3 — Preuve
+    'Des gens comme toi l\'ont déjà appliqué :\n\n✅ Aminata (Abidjan) : résultats en moins de 2 semaines\n✅ Kofi (Lomé) : a dit que c\'est le meilleur investissement qu\'il a fait\n✅ Fatou (Dakar) : recommande à toute sa famille\n\nMaintenant c\'est ton tour.',
+
+    // Message 4 — Offre
+    'Voici ce que tu obtiens :\n\n📘 '+title+'\n'+toc+'\n\n💰 Prix : seulement *'+price+'*\n\nPaiement via Wave, Orange Money, MTN MoMo\nLivraison immédiate sur WhatsApp ✅',
+
+    // Message 5 — Urgence
+    '⏰ ATTENTION !\n\nCe prix ne sera pas disponible longtemps.\n\nEnvoie *JE VEUX* maintenant pour bloquer ton accès à *'+price+'* avant que le prix augmente.\n\nDépêche-toi ! 🔥',
+
+    // Message Relance
+    'Je t\'avais envoyé quelque chose d\'important...\n\n📘 *'+title+'*\n\nTu as peut-être été occupé. Je comprends.\n\nMais je veux juste te rappeler que cette opportunité est toujours disponible à *'+price+'*.\n\nTu as des questions ? Réponds ici, je suis là. 😊'
+  ];
 }
 
 // ── DOWNLOAD OVERLAY ──
@@ -742,13 +1038,17 @@ function dlOverlay(msg, sub){
     +'<div id="dlbar" style="height:100%;width:5%;background:linear-gradient(90deg,#7c3aed,#ec4899);border-radius:10px;transition:width .3s"></div></div>';
   document.body.appendChild(ov);
   var p=5, bt=setInterval(function(){p+=8;if(p<=85)ov.querySelector('#dlbar').style.width=p+'%';},250);
-  return { ov:ov, bt:bt, done:function(){ clearInterval(bt); ov.querySelector('#dlbar').style.width='100%'; setTimeout(function(){document.body.removeChild(ov);},600); }, fail:function(e){ clearInterval(bt); document.body.removeChild(ov); alert('Erreur : '+e+'\nRéessaie ou recharge la page.'); }};
+  return {
+    ov:ov, bt:bt,
+    done:function(){ clearInterval(bt); ov.querySelector('#dlbar').style.width='100%'; setTimeout(function(){document.body.removeChild(ov);},600); },
+    fail:function(e){ clearInterval(bt); document.body.removeChild(ov); alert('Erreur : '+e+'\nRéessaie ou recharge la page.'); }
+  };
 }
 
-// ── DOWNLOAD SIMPLE ──
+// ── DOWNLOAD CLASSIQUE ──
 function downloadSimple(){
   if(!S.data)return;
-  var dl=dlOverlay('Création du PDF Simple...','Quelques secondes...');
+  var dl=dlOverlay('Création du PDF...','Quelques secondes...');
   fetch('/api/pdf',{
     method:'POST', headers:{'Content-Type':'application/json'},
     body:JSON.stringify({content:S.data,docType:S.type,docLabel:S.label,color:S.color,authorName:g('author-input').value.trim()})
@@ -762,91 +1062,42 @@ function downloadSimple(){
   }).catch(function(e){ dl.fail(e.message); });
 }
 
-// ── GENERATE VISUALS LOCALLY (no API call) ──
-function generateVisuals(data){
-  var visuals = [];
-  (data.chapters||[]).forEach(function(ch, ci){
-    var content = ch.content || '';
-    var lines = content.split('\n').filter(function(l){return l.trim().length>3;});
-    
-    // Detect numbered steps
-    var steps = lines.filter(function(l){return /^\d+[\.\ )]/.test(l.trim())&&l.length<120;})
-      .slice(0,5).map(function(l){return l.replace(/^\d+[\.\ )\s]+/,'').trim();});
-    
-    if(steps.length >= 3){
-      visuals.push({chapter_index:ci, type:'steps', data:{title:'Les etapes cles', steps:steps}});
-      return;
-    }
-    
-    // Detect FCFA values for chart
-    var fcfaMatches = [];
-    lines.forEach(function(l){
-      var m = l.match(/(\d[\d\s]{2,}(?:000)?(?:\s*FCFA)?)/g);
-      if(m) m.forEach(function(v){
-        var n = parseInt(v.replace(/\D/g,''));
-        if(n>=1000&&n<=10000000){
-          var label = l.replace(m[0],'').replace(/[\d\s,\.]+FCFA/g,'').trim().slice(0,30);
-          if(label.length>3) fcfaMatches.push({label:label, value:n, unit:'FCFA'});
-        }
-      });
-    });
-    if(fcfaMatches.length>=2){
-      visuals.push({chapter_index:ci, type:'chart', data:{title:'Chiffres cles', values:fcfaMatches.slice(0,4)}});
-      return;
-    }
-    
-    // Find a strong sentence for quote
-    var strong = lines.filter(function(l){
-      return l.length>40&&l.length<160&&!l.includes('http')&&/[!]|important|cle|essentiel|secret|conseil/i.test(l);
-    });
-    if(strong.length>0){
-      visuals.push({chapter_index:ci, type:'quote', data:{text:strong[0].replace(/[*#]/g,'').trim()}});
-      return;
-    }
-    
-    // Default: highlight key points from chapter
-    var points = lines.filter(function(l){
-      return l.trim().length>15&&l.trim().length<100&&!l.match(/^[A-Z]{3,}/);
-    }).slice(0,4);
-    if(points.length>=2){
-      visuals.push({chapter_index:ci, type:'highlight', data:{
-        title:'Points importants',
-        points:points.map(function(p){return p.replace(/[*#:]/g,'').trim();})
-      }});
-    }
-  });
-  return visuals;
-}
-
-// ── DOWNLOAD PREMIUM ──
-async function downloadPremium(){
+// ── DOWNLOAD NOUVEAU FLOW ──
+function downloadNew(){
   if(!S.data)return;
-  var dl=dlOverlay('Creation du PDF Premium...','Ajout des visuels...');
-
-  try{
-    // Generate visuals locally - no API call needed
-    var visuals = generateVisuals(S.data);
-
-    // Single API call to generate premium PDF
-    var pRes=await fetch('/api/pdf-premium',{
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({content:S.data, visuals:visuals, docType:S.type, docLabel:S.label, color:S.color})
-    });
-    if(!pRes.ok){
-      var errData=await pRes.json().catch(function(){return{error:'Erreur serveur'};});
-      throw new Error(errData.error||'Erreur PDF Premium '+pRes.status);
-    }
-    var blob=await pRes.blob();
+  var dl=dlOverlay('Création du PDF nouveau flow...','Structure 7 parties...');
+  fetch('/api/pdf2',{
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({content:S.data, authorName:g('author-input-new').value.trim()})
+  }).then(function(r){ if(!r.ok)throw new Error('Erreur '+r.status); return r.blob(); })
+  .then(function(blob){
     dl.done();
     var url=URL.createObjectURL(blob);
     var a=document.createElement('a');
-    a.href=url;
-    a.download=((S.data.title||'doc').replace(/[^a-zA-Z0-9 ]/g,'').replace(/ +/g,'_').slice(0,40))+'_premium.pdf';
+    a.href=url; a.download=((S.data.title||'ebook').replace(/[^a-zA-Z0-9 ]/g,'').replace(/ +/g,'_').slice(0,40))+'_v2.pdf';
     document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
-  }catch(e){ dl.fail(e.message); }
+  }).catch(function(e){ dl.fail(e.message); });
 }
 
-// ── SALES PAGE ──
+// ── DOWNLOAD WA TXT ──
+function downloadWaTxt(){
+  if(!S.waSystem)return;
+  var waLabels=['MESSAGE 1 - ACCROCHE','MESSAGE 2 - PRESENTATION','MESSAGE 3 - PREUVE','MESSAGE 4 - OFFRE','MESSAGE 5 - URGENCE','MESSAGE RELANCE'];
+  var txt = '=== SYSTEME DE VENTE WHATSAPP ===\n';
+  txt += (S.data&&S.data.title?S.data.title:'')+'\n';
+  txt += '================================\n\n';
+  S.waSystem.forEach(function(msg,i){
+    txt += '--- '+(waLabels[i]||'MESSAGE '+(i+1))+' ---\n\n';
+    txt += msg+'\n\n';
+  });
+  var blob=new Blob([txt],{type:'text/plain;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url; a.download='systeme-vente-whatsapp.txt';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+
+// ── SALES PAGE (classique) ──
 function renderSales(){
   var d=S.data; if(!d)return;
   var c=S.color;
@@ -883,45 +1134,130 @@ function buildSalesHTML(){
   +'.title{font-size:clamp(22px,7vw,36px);font-weight:900;color:#fff;line-height:1.15;margin-bottom:10px}'
   +'.sub{font-size:14px;color:rgba(255,255,255,.65);line-height:1.65;margin-bottom:22px;max-width:440px;margin-left:auto;margin-right:auto}'
   +'.pbox{display:inline-flex;flex-direction:column;align-items:center;background:rgba(16,185,129,.15);border:2px solid rgba(16,185,129,.4);border-radius:12px;padding:14px 24px}'
-  +'.pold{font-size:12px;color:rgba(255,255,255,.4);text-decoration:line-through;margin-bottom:3px}'
-  +'.pnow{font-size:30px;font-weight:900;color:#4ade80}.plbl{font-size:10px;color:rgba(255,255,255,.4);margin-top:3px}'
+  +'.pnow{font-size:30px;font-weight:900;color:#4ade80}'
   +'.body{max-width:500px;margin:0 auto;padding:24px 16px 60px}'
   +'.urg{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.4);border-radius:9px;padding:12px;font-size:12px;color:#fca5a5;text-align:center;font-weight:700;margin-bottom:20px}'
   +'.stitle{font-size:16px;font-weight:900;color:#fff;margin-bottom:12px}'
   +'.feat{display:flex;gap:10px;align-items:flex-start;padding:12px;background:#0f0f1e;border:1px solid #2a2a45;border-radius:10px;margin-bottom:7px;font-size:13px;color:#e2e2f0;line-height:1.5}'
   +'.ck{color:#10b981;font-weight:900;font-size:14px;flex-shrink:0}'
-  +'.ti{display:flex;gap:10px;padding:10px 12px;background:#0f0f1e;border:1px solid #2a2a45;border-radius:9px;margin-bottom:5px;font-size:12px;color:#e2e2f0}'
-  +'.tn{color:'+c.ac+';font-weight:800;min-width:18px}'
   +'.cta{background:linear-gradient(135deg,'+c.c1+','+c.c2+');border:2px solid '+c.ac+';border-radius:14px;padding:24px;text-align:center;margin:20px 0}'
-  +'.ctasub{font-size:12px;color:rgba(255,255,255,.6);margin-bottom:14px;line-height:1.6}'
   +'.wabtn{display:block;background:linear-gradient(135deg,#059669,#10b981);border-radius:12px;padding:16px;color:#fff;font-size:15px;font-weight:900;text-decoration:none;text-align:center}'
   +'.msgbox{background:#0f0f1e;border:1px solid #2a2a45;border-radius:10px;padding:13px;font-size:12px;color:#9898b8;line-height:1.7;white-space:pre-wrap;margin-bottom:12px}'
   +'.brand{text-align:center;font-size:10px;color:#5a5a78;padding-top:16px;border-top:1px solid #2a2a45}'
   +'</style></head><body><div class="bar"></div>'
-  +'<div class="hero"><div class="badge">✦ '+S.label.toUpperCase()+' ✦</div><div class="title">'+d.title+'</div><div class="sub">'+(d.subtitle||'')+'</div>'
-  +'<div class="pbox"><div class="pold">'+mup(d.price_suggested,2)+'</div><div class="pnow">'+d.price_suggested+'</div><div class="plbl">Prix spécial aujourd\'hui</div></div></div>'
+  +'<div class="hero"><div class="badge">✦ EBOOK ✦</div><div class="title">'+d.title+'</div><div class="sub">'+(d.subtitle||'')+'</div>'
+  +'<div class="pbox"><div class="pnow">'+d.price_suggested+'</div></div></div>'
   +'<div class="body"><div class="urg">Offre limitée — Ce prix ne durera pas longtemps !</div>'
   +'<div class="stitle">Ce que tu vas obtenir</div>'
   +(d.key_takeaways||[]).map(function(k){return'<div class="feat"><span class="ck">✓</span><span>'+k+'</span></div>';}).join('')
-  +'<br><div class="stitle">Au programme</div>'
-  +(d.table_of_contents||[]).map(function(t,i){return'<div class="ti"><span class="tn">'+(i+1)+'.</span><span>'+t+'</span></div>';}).join('')
-  +'<div class="cta"><div class="ctasub">Envoie ce message pour commander maintenant</div>'
-  +'<a class="wabtn" href="https://wa.me/'+MON_WA+'?text='+encodeURIComponent('Je veux commander : '+d.title+' ('+d.price_suggested+')')+'">💬 Commander sur WhatsApp</a></div>'
-  +'<div class="stitle">Message prêt à copier</div>'
+  +'<div class="cta"><a class="wabtn" href="https://wa.me/'+MON_WA+'?text='+encodeURIComponent('Je veux commander : '+d.title+' ('+d.price_suggested+')')+'">💬 Commander sur WhatsApp</a></div>'
   +'<div class="msgbox">'+full+'</div>'
   +'<div class="brand">Créé avec PDF Cash IA</div></div></body></html>';
 }
 
-// ── PAYMENT BUTTONS ──
 function openWA(method){
   var d=S.data; if(!d)return;
-  var msg='Bonjour !\n\nJe souhaite commander :\n\n*'+d.title+'*\n\nPrix : '+d.price_suggested+'\nPaiement : '+method+'\n\nMerci de m\'envoyer tes coordonnées de paiement.\nJe t\'envoie la preuve dès que c\'est fait. ✅';
+  var msg='Bonjour !\n\nJe souhaite commander :\n\n*'+d.title+'*\n\nPrix : '+d.price_suggested+'\nPaiement : '+method+'\n\nMerci de m\'envoyer tes coordonnées de paiement.\nJe t\'envoie la preuve dès que c\'est fait.';
   window.open('https://wa.me/'+MON_WA+'?text='+encodeURIComponent(msg),'_blank');
 }
 
-function reset(){ S.data=null; S.selectedIdea=null; g('domain-input').value=''; g('target-input').value=''; g('author-input').value=''; show('s-ideas'); }
+function reset(){
+  S.data=null; S.selectedIdea=null; S.flow=null; S.waSystem=null;
+  S.freeType='ebook'; S.freeLabel='Ebook';
+  g('domain-input').value=''; g('target-input').value=''; g('author-input').value='';
+  g('target-input-new').value=''; g('author-input-new').value='';
+  g('free-prompt-input').value='';
+  g('direct-title-new').value='';
+  g('btn-generate-free').disabled=true;
+  g('flow-classic-btn').classList.remove('active');
+  g('flow-new-btn').classList.remove('active');
+  g('flow-free-btn').classList.remove('active');
+  g('btn-start-flow').disabled=true;
+  g('btn-start-flow').textContent='Continuer →';
+  g('btn-start-flow').style.background='';
+  g('btn-start-flow').style.boxShadow='';
+  show('s-home');
+}
 
-// ── EVENTS ──
+// ── FLOW 3 : PROMPT LIBRE ──
+async function generateFree(){
+  var prompt = g('free-prompt-input').value.trim();
+  if(!prompt) return;
+  g('err-free').classList.add('hide');
+  show('s-gen');
+  startBar("L'IA analyse ton prompt...");
+  g('gen-topic').textContent='« '+(prompt.length>60?prompt.slice(0,60)+'...':prompt)+' »';
+  try{
+    var res=await fetch('/api/generate',{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        action:'prompt_libre',
+        userPromptLibre: prompt,
+        docType: S.freeType,
+        docLabel: S.freeLabel
+      })
+    });
+    var d=await res.json().catch(function(){return{error:'Réponse invalide'};});
+    if(!res.ok) throw new Error(d.error||'Erreur ('+res.status+')');
+    if(!d.title) throw new Error('Contenu incomplet. Reformule ton prompt.');
+    S.data=d;
+    S.type=S.freeType;
+    S.label=S.freeLabel;
+    stopBar();
+    bumpCounter();
+    setTimeout(function(){ renderResult(d); show('s-result'); },600);
+  }catch(e){
+    stopBar(); show('s-create-free'); showErr('err-free',e.message||'Erreur inconnue');
+  }
+}
+
+// ── EVENTS FLOW 3 ──
+
+// Textarea prompt libre — activer bouton
+g('free-prompt-input').addEventListener('input',function(){
+  var v=g('free-prompt-input').value.trim();
+  g('btn-generate-free').disabled=!v;
+});
+
+// Exemples cliquables
+document.querySelectorAll('.pl-ex').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    g('free-prompt-input').value=btn.dataset.prompt;
+    g('btn-generate-free').disabled=false;
+    // Auto-select type selon l'exemple
+    var typeMap={'CV':'cv','Guide':'guide','Business Plan':'business_plan','TikTok':'tiktok','Formation':'formation','Ebook':'ebook'};
+    var label=btn.querySelector('b').textContent;
+    var type=typeMap[label]||'ebook';
+    var labelFull={'cv':'CV Pro','guide':'Guide Pratique','business_plan':'Business Plan','tiktok':'Scripts TikTok','formation':'Mini-Formation','ebook':'Ebook'};
+    S.freeType=type; S.freeLabel=labelFull[type]||'Ebook';
+    document.querySelectorAll('.tbtn-free').forEach(function(b){
+      b.classList.toggle('sel', b.dataset.t===type);
+    });
+  });
+});
+
+// Type buttons Flow 3
+document.querySelectorAll('.tbtn-free').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.tbtn-free').forEach(function(b){b.classList.remove('sel');});
+    btn.classList.add('sel');
+    S.freeType=btn.dataset.t; S.freeLabel=btn.dataset.l;
+  });
+});
+
+g('btn-generate-free').addEventListener('click',generateFree);
+g('btn-back-home-free').addEventListener('click',function(){ show('s-home'); });
+
+// ── FIN LOGIQUE FLOW 3 ──
+
+// Home — démarrer flow
+g('btn-start-flow').addEventListener('click',function(){
+  if(!S.flow)return;
+  if(S.flow==='free') show('s-create-free');
+  else if(S.flow==='new') show('s-create-new'); // peut aller direct ou via idées
+  else show('s-ideas');
+});
+
 // Domain input
 g('domain-input').addEventListener('input',function(){
   var v=g('domain-input').value.trim();
@@ -943,8 +1279,18 @@ document.querySelectorAll('.sb').forEach(function(btn){
 g('btn-find-ideas').addEventListener('click',findIdeas);
 g('btn-retry-ideas').addEventListener('click',function(){ show('s-ideas'); });
 g('btn-use-idea').addEventListener('click',useIdea);
+
+// Flow classique
 g('btn-generate').addEventListener('click',generateContent);
 g('btn-back-ideas').addEventListener('click',function(){ show('s-ideas-result'); });
+
+// Nouveau flow
+g('btn-generate-new').addEventListener('click',generateContentNew);
+g('btn-back-ideas-new').addEventListener('click',function(){
+  // Si vient des idées → retour idées, sinon → retour accueil
+  if(S.selectedIdea) show('s-ideas-result');
+  else show('s-home');
+});
 
 // Type buttons
 document.querySelectorAll('.tbtn').forEach(function(btn){
@@ -974,21 +1320,44 @@ document.querySelectorAll('.cbtn').forEach(function(btn){
 
 // Back button
 g('btn-back').addEventListener('click',function(){
-  var active=['s-ideas','s-ideas-result','s-create','s-gen','s-result','s-sale'].find(function(id){
-    return g(id).classList.contains('on');
-  });
-  if(active==='s-ideas-result') show('s-ideas');
+  var steps=['s-home','s-ideas','s-ideas-result','s-create','s-create-new','s-create-free','s-result','s-result-new','s-sale'];
+  var active=steps.find(function(id){ var el=g(id); return el&&el.classList.contains('on'); });
+  if(active==='s-ideas') show('s-home');
+  else if(active==='s-ideas-result') show('s-ideas');
   else if(active==='s-create') show('s-ideas-result');
+  else if(active==='s-create-new') show('s-ideas-result');
+  else if(active==='s-create-free') show('s-home');
   else if(active==='s-result') show('s-create');
+  else if(active==='s-result-new') show('s-create-new');
   else if(active==='s-sale') show('s-result');
   else reset();
 });
 
-// Download
+// Downloads
 g('btn-dl-simple').addEventListener('click',downloadSimple);
-// btn-dl-premium removed
+g('btn-dl-new').addEventListener('click',downloadNew);
+g('btn-dl-wa-txt').addEventListener('click',downloadWaTxt);
 
-// Sales page
+// Copier tout les messages WA
+g('btn-copy-wa-all').addEventListener('click',function(){
+  if(!S.waSystem)return;
+  var txt=S.waSystem.join('\n\n---\n\n');
+  navigator.clipboard&&navigator.clipboard.writeText(txt).catch(function(){});
+  g('btn-copy-wa-all').textContent='✅ Tous copiés !'; g('btn-copy-wa-all').classList.add('ok');
+  setTimeout(function(){g('btn-copy-wa-all').textContent='📋 Copier tous les messages';g('btn-copy-wa-all').classList.remove('ok');},2500);
+});
+
+// Copier page de vente
+g('btn-copy-sale').addEventListener('click',function(){
+  if(!S.data)return;
+  var d=S.data;
+  var txt='TITRE : '+d.title+'\n\nDESCRIPTION : '+(d.description||d.subtitle||'')+'\n\nAPPEL A L\'ACTION : '+(d.call_to_action||'');
+  navigator.clipboard&&navigator.clipboard.writeText(txt).catch(function(){});
+  g('btn-copy-sale').textContent='✅ Copié !'; g('btn-copy-sale').classList.add('ok');
+  setTimeout(function(){g('btn-copy-sale').textContent='📋 Copier la page de vente';g('btn-copy-sale').classList.remove('ok');},2000);
+});
+
+// Sales page classique
 g('btn-sales-page').addEventListener('click',function(){ if(!S.data)return; renderSales(); show('s-sale'); });
 g('btn-dl-sp').addEventListener('click',function(){
   if(!S.data)return;
@@ -999,14 +1368,14 @@ g('btn-dl-sp').addEventListener('click',function(){
   document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
 });
 
-// Copy WA
+// Copy WA classique
 g('btn-copy-wa').addEventListener('click',function(){
   navigator.clipboard&&navigator.clipboard.writeText(g('p-wa').textContent).catch(function(){});
   g('btn-copy-wa').textContent='✅ Copié !'; g('btn-copy-wa').classList.add('ok');
   setTimeout(function(){g('btn-copy-wa').textContent='📋 Copier';g('btn-copy-wa').classList.remove('ok');},2000);
 });
 
-// Copy Ads
+// Copy Ads classique
 g('btn-copy-ads').addEventListener('click',function(){
   var d=S.data; if(!d)return;
   var ads=d.facebook_ads||{};
@@ -1026,13 +1395,15 @@ g('p-mpesa').addEventListener('click',function(){openWA('M-Pesa');});
 
 // Misc
 g('btn-new').addEventListener('click',function(){ g('domain-input').value=''; g('target-input').value=''; g('author-input').value=''; show('s-ideas-result'); });
+g('btn-new-nf').addEventListener('click',function(){ g('domain-input').value=''; g('target-input-new').value=''; show('s-ideas-result'); });
 g('btn-rst').addEventListener('click',reset);
+g('btn-rst-nf').addEventListener('click',reset);
 g('btn-back-result').addEventListener('click',function(){ show('s-result'); });
 g('btn-rst2').addEventListener('click',reset);
 
 // ── INIT ──
 initCounter();
-show('s-ideas');
+show('s-home');
 </script>
 </body>
 </html>
