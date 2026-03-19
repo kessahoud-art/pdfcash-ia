@@ -313,7 +313,11 @@ textarea::placeholder,input::placeholder{color:var(--t4)}
 
   <!-- Pour qui -->
   <div class="lbl fu" style="animation-delay:.13s">POUR QUI ? <span style="color:var(--t4);font-weight:400;font-size:9px">(optionnel mais recommandé)</span></div>
-  <input type="text" id="target-input" placeholder="Ex: femmes au foyer au Bénin, étudiants sans emploi..." class="fu" style="animation-delay:.15s"/>
+  <input type="text" id="target-input" placeholder="Ex: femmes au foyer au Benin, etudiants sans emploi..." class="fu" style="animation-delay:.15s"/>
+
+  <!-- Auteur -->
+  <div class="lbl fu" style="animation-delay:.14s">NOM D'AUTEUR <span style="color:var(--t4);font-weight:400;font-size:9px">(optionnel)</span></div>
+  <input type="text" id="author-input" placeholder="Ex: Jean Kouassi, Coach Aminata..." class="fu" style="animation-delay:.145s"/>
 
   <!-- Niveau -->
   <div class="lbl fu" style="animation-delay:.17s">NIVEAU DU CONTENU</div>
@@ -747,7 +751,7 @@ function downloadSimple(){
   var dl=dlOverlay('Création du PDF Simple...','Quelques secondes...');
   fetch('/api/pdf',{
     method:'POST', headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({content:S.data,docType:S.type,docLabel:S.label,color:S.color})
+    body:JSON.stringify({content:S.data,docType:S.type,docLabel:S.label,color:S.color,authorName:g('author-input').value.trim()})
   }).then(function(r){ if(!r.ok)throw new Error('Erreur '+r.status); return r.blob(); })
   .then(function(blob){
     dl.done();
@@ -915,7 +919,7 @@ function openWA(method){
   window.open('https://wa.me/'+MON_WA+'?text='+encodeURIComponent(msg),'_blank');
 }
 
-function reset(){ S.data=null; S.selectedIdea=null; g('domain-input').value=''; g('target-input').value=''; show('s-ideas'); }
+function reset(){ S.data=null; S.selectedIdea=null; g('domain-input').value=''; g('target-input').value=''; g('author-input').value=''; show('s-ideas'); }
 
 // ── EVENTS ──
 // Domain input
@@ -1021,7 +1025,7 @@ g('p-airtel').addEventListener('click',function(){openWA('Airtel Money');});
 g('p-mpesa').addEventListener('click',function(){openWA('M-Pesa');});
 
 // Misc
-g('btn-new').addEventListener('click',function(){ g('domain-input').value=''; g('target-input').value=''; show('s-ideas-result'); });
+g('btn-new').addEventListener('click',function(){ g('domain-input').value=''; g('target-input').value=''; g('author-input').value=''; show('s-ideas-result'); });
 g('btn-rst').addEventListener('click',reset);
 g('btn-back-result').addEventListener('click',function(){ show('s-result'); });
 g('btn-rst2').addEventListener('click',reset);
