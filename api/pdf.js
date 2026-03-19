@@ -1,4 +1,9 @@
 import PDFDocument from 'pdfkit';
+import cvHandler from './pdf-cv.js';
+import businessHandler from './pdf-business.js';
+import tiktokHandler from './pdf-tiktok.js';
+import formationHandler from './pdf-formation.js';
+import guideHandler from './pdf-guide.js';
 
 // Remove all emojis and non-latin chars that PDFKit can't render
 function clean(str) {
@@ -30,6 +35,14 @@ export default async function handler(req, res) {
 
   const { content: C, docType, docLabel, color, authorName } = req.body || {};
   if (!C || !C.title) return res.status(400).json({ error: "Contenu manquant" });
+
+  // ── ROUTING PAR TYPE — 6 templates ──
+  if (docType === 'cv')           return cvHandler(req, res);
+  if (docType === 'business_plan') return businessHandler(req, res);
+  if (docType === 'tiktok')       return tiktokHandler(req, res);
+  if (docType === 'formation')    return formationHandler(req, res);
+  if (docType === 'guide')        return guideHandler(req, res);
+  // ebook → template par défaut ci-dessous
 
   // ── COLOR SETUP ──
   const col = color || { c1: "#7c3aed", ac: "#7c3aed" };
